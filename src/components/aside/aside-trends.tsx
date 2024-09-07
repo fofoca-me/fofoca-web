@@ -30,7 +30,7 @@ export function AsideTrends(): JSX.Element {
   );
 
   return (
-    <section>
+    <section className='bg-white rounded-md shadow-md  border border-gray-200 dark:bg-zinc-900 dark:border-main-background'>
       {loading ? (
         <Loading />
       ) : data ? (
@@ -73,7 +73,7 @@ export function AsideTrends(): JSX.Element {
               </span>
             </Link>
           ))}
-          <Link href='/trends' className='custom-button accent-tab hover-card block w-full rounded-2xl
+          <Link href='/trends' className='custom-button py-4 accent-tab hover-card block w-full rounded-2xl
           rounded-t-none text-center text-main-accent'>
             Mostrar mais
           </Link>
