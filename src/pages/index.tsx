@@ -1,7 +1,7 @@
-import { AuthLayout } from '@components/layout/auth-layout';
 import { SEO } from '@components/common/seo';
-import { LoginMain } from '@components/login/login-main';
+import { AuthLayout } from '@components/layout/auth-layout';
 import { LoginFooter } from '@components/login/login-footer';
+import { LoginMain } from '@components/login/login-main';
 import type { ReactElement, ReactNode } from 'react';
 
 export default function Login(): JSX.Element {
@@ -11,6 +11,7 @@ export default function Login(): JSX.Element {
         title='Fofoca-me - A nossa rede social!'
         description='Desde os nossos memes aos debates políticos, tudo você encontra aqui.'
       />
+
       <LoginMain />
       <LoginFooter />
     </div>
