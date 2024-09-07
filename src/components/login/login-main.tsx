@@ -1,8 +1,8 @@
+import Image from 'next/image';
 import { useAuth } from '@lib/context/auth-context';
 import { NextImage } from '@components/ui/next-image';
 import { CustomIcon } from '@components/ui/custom-icon';
 import { Button } from '@components/ui/button';
-import Image from 'next/image';
 
 export function LoginMain(): JSX.Element {
   const { signInWithGoogle } = useAuth();
@@ -33,8 +33,8 @@ export function LoginMain(): JSX.Element {
         </i>
         <div className='flex max-w-xs flex-col gap-4 font-twitter-chirp-extended lg:max-w-none lg:gap-16'>
           <h1
-            className='text-3xl before:content-["See_what’s_happening_in_the_world_right_now."] 
-                       lg:text-6xl lg:before:content-["Happening_now"]'
+            className='text-3xl before:content-["Aqui_você_pode_fofocar_a_vontade."] 
+                       lg:text-6xl lg:before:content-["Fofoca?_Rasga!"]'
           />
           <h2 className='hidden text-xl lg:block lg:text-3xl'>
             Cadastre-se no Fofoca hoje.
