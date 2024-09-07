@@ -1,28 +1,33 @@
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import cn from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { preventBubbling } from '@lib/utils';
 import type { NavLink } from './sidebar';
+import { useAuth } from '@lib/context/auth-context';
+import { useCollection } from '@lib/hooks/useCollection';
+import { notificationsCollection } from '@lib/firebase/collections';
+import { query, where } from 'firebase/firestore';
 
 type SidebarLinkProps = NavLink & {
   username?: string;
-  count?: number;
 };
 
 export function SidebarLink({
   href,
   username,
   icon,
+  count,
   linkName,
   disabled,
-  count,
-  canBeHidden
+  canBeHidden,
 }: SidebarLinkProps): JSX.Element {
   const { asPath } = useRouter();
-  const isActive = username ? asPath.includes(username) : asPath === href;
+  
+  const { user } = useAuth();
 
-  console.log(count);
+  const isActive = username ? asPath.includes(username) : asPath === href;
 
   return (
     <Link href={href}>
@@ -43,20 +48,20 @@ export function SidebarLink({
             isActive && 'font-bold'
           )}
         >
-          {icon}
+          <div className={cn(isActive && 'text-main-accent')}>
+            {icon}
+          </div>
           <p className='hidden xl:block'>{linkName}</p>
           <AnimatePresence>
-            {count && count !== 0 ? (
+            {count && count > 0 && (
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
                 className='hidden h-4 w-4 items-center justify-center rounded-full bg-white xl:flex'
               >
-                <p className='text-xs text-black'>{count}</p>
-              </motion.div>
-            ) : (
-              <></>
+               <p className='text-xs text-black'>{count}</p>
+             </motion.div>
             )}
           </AnimatePresence>
         </div>

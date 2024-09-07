@@ -5,9 +5,9 @@ import {
   CiMail,
   CiBellOn,
   CiBookmark,
-  CiTextAlignLeft,
   CiUser
 } from 'react-icons/ci';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@lib/context/auth-context';
 import { useWindow } from '@lib/context/window-context';
 import { useModal } from '@lib/hooks/useModal';
@@ -19,58 +19,20 @@ import { SidebarLink } from './sidebar-link';
 import { MoreSettings } from './more-settings';
 import { SidebarProfile } from './sidebar-profile';
 import type { ReactNode } from 'react';
-import type { IconName } from '@components/ui/hero-icon';
-import { SidebarLinkWrapper } from './sidebar-wrapper';
 import Image from 'next/image';
+import { useCollection } from '@lib/hooks/useCollection';
+import { notificationsCollection } from '@lib/firebase/collections';
+import { query, where } from 'firebase/firestore';
 
 export type NavLink = {
   href: string;
   linkName: string;
-  iconName: IconName;
   isNotification?: boolean;
   disabled?: boolean;
   canBeHidden?: boolean;
   icon?: ReactNode;
+  count?: number;
 };
-
-const navLinks: Readonly<NavLink[]> = [
-  {
-    href: '/home',
-    linkName: 'Home',
-    iconName: 'HomeIcon',
-    icon: <CiHome size={34} />
-  },
-  {
-    href: '/explore',
-    linkName: 'Explorar',
-    iconName: 'HashtagIcon',
-    disabled: true,
-    canBeHidden: true,
-    icon: <CiHashtag size={34} />
-  },
-  {
-    href: '/notifications',
-    linkName: 'Notificações',
-    iconName: 'BellIcon',
-    disabled: false,
-    isNotification: true,
-    icon: <CiBellOn size={34} />
-  },
-  {
-    href: '/messages',
-    linkName: 'Mensagens',
-    iconName: 'EnvelopeIcon',
-    disabled: true,
-    icon: <CiMail size={34} />
-  },
-  {
-    href: '/bookmarks',
-    linkName: 'Babados',
-    iconName: 'BookmarkIcon',
-    canBeHidden: true,
-    icon: <CiBookmark size={34} />
-  }
-];
 
 export function Sidebar(): JSX.Element {
   const { user } = useAuth();
@@ -79,6 +41,63 @@ export function Sidebar(): JSX.Element {
   const { open, openModal, closeModal } = useModal();
 
   const username = user?.username as string;
+
+  const [navLinksWithCount, setNavLinksWithCount] = useState<NavLink[]>([
+    {
+      href: '/home',
+      linkName: 'Home',
+      count: 0,
+      icon: <CiHome size={34} />
+    },
+    {
+      href: '/trends',
+      linkName: 'Tendências',
+      disabled: false,
+      canBeHidden: false,
+      count: 0,
+      icon: <CiHashtag size={34} />
+    },
+    {
+      href: '/notifications',
+      linkName: 'Notificações',
+      disabled: false,
+      isNotification: true,
+      count: 0,
+      icon: <CiBellOn size={34} />
+    },
+    {
+      href: '/messages',
+      linkName: 'Mensagens',
+      disabled: true,
+      count: 0,
+      icon: <CiMail size={34} />
+    },
+    {
+      href: '/bookmarks',
+      linkName: 'Babados',
+      canBeHidden: true,
+      count: 0,
+      icon: <CiBookmark size={34} />
+    }
+  ]);
+
+  const { data: notifications } = useCollection(
+    query(
+      notificationsCollection,
+      where('targetUserId', '==', user?.id),
+      where('isChecked', '==', false)
+    )
+  );
+
+  useEffect(() => {
+    if(notifications) {
+      setNavLinksWithCount((prevItems) => (
+        prevItems.map((link: NavLink) => 
+          link.linkName === 'Notificações' ? { ...link, count: notifications.length } : link
+        )
+      ));
+    }
+  }, [notifications])
 
   return (
     <header
@@ -117,18 +136,13 @@ export function Sidebar(): JSX.Element {
             </Link>
           </h1>
           <nav className='flex items-center justify-around xs:flex-col xs:justify-center xl:block'>
-            {navLinks.map(({ ...linkData }) =>
-              linkData.isNotification ? (
-                <SidebarLinkWrapper {...linkData} Component={SidebarLink} />
-              ) : (
-                <SidebarLink {...linkData} key={linkData.href} />
-              )
+            {navLinksWithCount.map(({ ...linkData }) =>
+              <SidebarLink {...linkData} key={linkData.href} />
             )}
             <SidebarLink
               href={`/user/${username}`}
               username={username}
               linkName='Perfil'
-              iconName='UserIcon'
               icon={<CiUser size={34} />}
             />
             {!isMobile && <MoreSettings />}
