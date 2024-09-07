@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import { useAuth } from '@lib/context/auth-context';
-import { NextImage } from '@components/ui/next-image';
-import { CustomIcon } from '@components/ui/custom-icon';
 import { Button } from '@components/ui/button';
+import { CustomIcon } from '@components/ui/custom-icon';
+import { NextImage } from '@components/ui/next-image';
+import { useAuth } from '@lib/context/auth-context';
+import Image from 'next/image';
 
 export function LoginMain(): JSX.Element {
   const { signInWithGoogle } = useAuth();
@@ -12,8 +12,7 @@ export function LoginMain(): JSX.Element {
       <div className='relative hidden items-center justify-center  lg:flex'>
         <NextImage
           imgClassName='object-cover'
-          blurClassName='bg-accent-pink'
-          src='/assets/fofoca-banner.webp'
+          src='/assets/login-background.png'
           alt='Fofoca banner'
           layout='fill'
           useSkeleton
@@ -57,7 +56,7 @@ export function LoginMain(): JSX.Element {
 
             <p
               className='inner:custom-underline inner:custom-underline text-center text-xs
-                         text-light-secondary inner:text-accent-pink dark:text-dark-secondary'
+                         text-light-secondary inner:text-[#EF2182] dark:text-dark-secondary'
             >
               Ao se inscrever, você concorda com os{' '}
               <a
@@ -69,7 +68,7 @@ export function LoginMain(): JSX.Element {
               </a>{' '}
               e{' '}
               <a
-                href='/rules-and-policies/privacy-policy'
+                href='/rules-and-policies/policy'
                 target='_blank'
                 rel='noreferrer'
               >
@@ -81,7 +80,7 @@ export function LoginMain(): JSX.Element {
                 target='_blank'
                 rel='noreferrer'
               >
-                Uso de cookies
+                uso de cookies
               </a>
               .
             </p>
@@ -89,8 +88,8 @@ export function LoginMain(): JSX.Element {
           <div className='flex flex-col gap-3'>
             <p className='font-bold'>Já tem uma conta?</p>
             <Button
-              className='border border-light-line-reply font-bold text-accent-pink hover:bg-accent-pink/10
-                         focus-visible:bg-accent-pink/10 focus-visible:!ring-accent-pink/80 active:bg-accent-pink/20
+              className='border border-light-line-reply font-bold text-[#EF2182] hover:bg-[#EF2182]/10
+                         focus-visible:bg-[#EF2182]/10 focus-visible:!ring-[#EF2182]/80 active:bg-[#EF2182]/20
                          dark:border-light-secondary'
               onClick={signInWithGoogle}
             >

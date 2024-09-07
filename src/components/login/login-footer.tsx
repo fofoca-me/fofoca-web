@@ -1,9 +1,23 @@
 const footerLinks = [
-  ['Home', 'https://fofoca.me'],
-  ['Contato', 'mailto:contato@fofoca.me'],
-  ['Política de Privacidade', '/rules-and-policies/privacy-policy'],
-  ['Política de Cookies', '/rules-and-policies/cookies'],
-  ['Termos de uso', '/rules-and-policies/terms']
+  // ['About', 'https://about.twitter.com'],
+  ['Ajuda', '/help'],
+  ['Política de Privacidade', '/rules-and-policies/policy']
+  // ['Cookie Policy', 'https://support.twitter.com/articles/20170514'],
+  // ['Accessibility', 'https://help.twitter.com/resources/accessibility'],
+  // [
+  //   'Ads Info',
+  //   'https://business.twitter.com/en/help/troubleshooting/how-twitter-ads-work.html'
+  // ],
+  // ['Blog', 'https://blog.twitter.com'],
+  // ['Status', 'https://status.twitterstat.us'],
+  // ['Careers', 'https://careers.twitter.com'],
+  // ['Brand Resources', 'https://about.twitter.com/press/brand-assets'],
+  // ['Advertising', 'https://ads.twitter.com/?ref=gl-tw-tw-twitter-advertise'],
+  // ['Marketing', 'https://marketing.twitter.com'],
+  // ['Twitter for Business', 'https://business.twitter.com'],
+  // ['Developers', 'https://developer.twitter.com'],
+  // ['Directory', 'https://twitter.com/i/directory/profiles'],
+  // ['Configurações', 'https://fofoca.me/settings']
 ] as const;
 
 export function LoginFooter(): JSX.Element {
@@ -21,7 +35,7 @@ export function LoginFooter(): JSX.Element {
             {linkName}
           </a>
         ))}
-        <p>© 2024 Fofoca.me</p>
+        <p>© 2024 Fofoca</p>
       </nav>
     </footer>
   );
