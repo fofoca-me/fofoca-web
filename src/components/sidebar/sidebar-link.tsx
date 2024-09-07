@@ -17,10 +17,10 @@ export function SidebarLink({
   count,
   linkName,
   disabled,
-  canBeHidden,
+  canBeHidden
 }: SidebarLinkProps): JSX.Element {
   const { asPath } = useRouter();
-  
+
   const { user } = useAuth();
 
   const isActive = username ? asPath.includes(username) : asPath === href;
@@ -44,9 +44,7 @@ export function SidebarLink({
             isActive && 'font-bold'
           )}
         >
-          <div className={cn(isActive && 'text-main-accent')}>
-            {icon}
-          </div>
+          <div className={cn(isActive && 'text-main-accent')}>{icon}</div>
           <p className='hidden xl:block'>{linkName}</p>
           <AnimatePresence>
             {count && count > 0 && (
@@ -56,8 +54,8 @@ export function SidebarLink({
                 exit={{ scale: 0.8, opacity: 0 }}
                 className='hidden h-4 w-4 items-center justify-center rounded-full bg-white xl:flex'
               >
-               <p className='text-xs text-black'>{count}</p>
-             </motion.div>
+                <p className='text-xs text-black'>{count}</p>
+              </motion.div>
             )}
           </AnimatePresence>
         </div>

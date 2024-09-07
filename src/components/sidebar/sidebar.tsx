@@ -80,7 +80,7 @@ const navLinks: Readonly<NavLink[]> = [
   }
 ];
 
-export type NewNavLinks = Omit<NavLink, 'iconName'>
+export type NewNavLinks = Omit<NavLink, 'iconName'>;
 
 export function Sidebar(): JSX.Element {
   const { user } = useAuth();
@@ -139,14 +139,16 @@ export function Sidebar(): JSX.Element {
   );
 
   useEffect(() => {
-    if(notifications) {
-      setNavLinksWithCount((prevItems) => (
-        prevItems.map((link: NewNavLinks) => 
-          link.linkName === 'Notificações' ? { ...link, count: notifications.length } : link
+    if (notifications) {
+      setNavLinksWithCount((prevItems) =>
+        prevItems.map((link: NewNavLinks) =>
+          link.linkName === 'Notificações'
+            ? { ...link, count: notifications.length }
+            : link
         )
-      ));
+      );
     }
-  }, [notifications])
+  }, [notifications]);
 
   return (
     <header
@@ -185,9 +187,9 @@ export function Sidebar(): JSX.Element {
             </Link>
           </h1>
           <nav className='flex items-center justify-around xs:flex-col xs:justify-center xl:block'>
-            {navLinksWithCount.map(({ ...linkData }) =>
+            {navLinksWithCount.map(({ ...linkData }) => (
               <SidebarLink {...linkData} key={linkData.href} />
-            )}
+            ))}
             <SidebarLink
               href={`/user/${username}`}
               username={username}
