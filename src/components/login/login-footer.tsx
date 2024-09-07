@@ -1,9 +1,9 @@
 const footerLinks = [
   ['Home', 'https://fofoca.me'],
   ['Contato', 'mailto:contato@fofoca.me'],
-  ['Política de Privacidade', 'https://google.com.br'],
-  ['Política de Cookies', 'https://google.com.br'],
-  ['Termos de uso', 'https://google.com.br']
+  ['Política de Privacidade', '/rules-and-policies/privacy-policy'],
+  ['Política de Cookies', '/rules-and-policies/cookies'],
+  ['Termos de uso', '/rules-and-policies/terms']
 ] as const;
 
 export function LoginFooter(): JSX.Element {

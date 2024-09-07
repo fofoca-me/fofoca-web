@@ -61,7 +61,7 @@ export function LoginMain(): JSX.Element {
             >
               Ao se inscrever, você concorda com os{' '}
               <a
-                href='https://google.com.br'
+                href='/rules-and-policies/terms'
                 target='_blank'
                 rel='noreferrer'
               >
@@ -69,7 +69,7 @@ export function LoginMain(): JSX.Element {
               </a>{' '}
               e{' '}
               <a
-                href='https://google.com.br'
+                href='/rules-and-policies/privacy-policy'
                 target='_blank'
                 rel='noreferrer'
               >
@@ -77,7 +77,7 @@ export function LoginMain(): JSX.Element {
               </a>
               , incluindo{' '}
               <a
-                href='https://google.com.br'
+                href='/rules-and-policies/cookies'
                 target='_blank'
                 rel='noreferrer'
               >
