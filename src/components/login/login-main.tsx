@@ -1,7 +1,7 @@
-import { useAuth } from '@lib/context/auth-context';
-import { NextImage } from '@components/ui/next-image';
-import { CustomIcon } from '@components/ui/custom-icon';
 import { Button } from '@components/ui/button';
+import { CustomIcon } from '@components/ui/custom-icon';
+import { NextImage } from '@components/ui/next-image';
+import { useAuth } from '@lib/context/auth-context';
 import Image from 'next/image';
 
 export function LoginMain(): JSX.Element {
@@ -13,14 +13,11 @@ export function LoginMain(): JSX.Element {
         <NextImage
           imgClassName='object-cover'
           blurClassName='bg-accent-blue'
-          src='/assets/twitter-banner.png'
+          src='/assets/login-background.png'
           alt='Fofoca banner'
           layout='fill'
           useSkeleton
         />
-        <i className='absolute'>
-          <CustomIcon className='h-96 w-96 text-white' iconName='TwitterIcon' />
-        </i>
       </div>
       <div className='flex flex-col items-center justify-between gap-6 p-8 lg:items-start lg:justify-center'>
         <i className='mb-0 self-center lg:mb-10 lg:self-auto'>
