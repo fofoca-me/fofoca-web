@@ -16,7 +16,7 @@ const PrivacyPolicy: React.FC = () => {
       <h2 className='text-2xl font-semibold mb-2'>1. Uso da Plataforma</h2>
       <p className='mb-4'>
         O serviço fofoca.me permite que você publique mensagens curtas,
-        chamadas de "fofocas". Mantenha o respeito ao interagir na plataforma.
+        chamadas de &quot;fofocas&quot;. Mantenha o respeito ao interagir na plataforma.
       </p>
       <h2 className='text-2xl font-semibold mb-2'>2. Moderação</h2>
       <p className='mb-4'>

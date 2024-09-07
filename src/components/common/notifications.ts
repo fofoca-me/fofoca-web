@@ -15,7 +15,7 @@ const placeholder = {
   }
 };
 
-const ReplaceParams = (toReplace: object, replace: object) => {
+const ReplaceParams = (toReplace: object, replace: object): object => {
   const result: any = { ...toReplace };
 
   Object.keys(toReplace).forEach((key) => {
