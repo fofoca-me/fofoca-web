@@ -1,16 +1,12 @@
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import cn from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { preventBubbling } from '@lib/utils';
-import type { NavLink } from './sidebar';
+import type { NewNavLinks } from './sidebar';
 import { useAuth } from '@lib/context/auth-context';
-import { useCollection } from '@lib/hooks/useCollection';
-import { notificationsCollection } from '@lib/firebase/collections';
-import { query, where } from 'firebase/firestore';
 
-type SidebarLinkProps = NavLink & {
+type SidebarLinkProps = NewNavLinks & {
   username?: string;
 };
 

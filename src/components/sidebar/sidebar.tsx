@@ -24,6 +24,11 @@ import { useCollection } from '@lib/hooks/useCollection';
 import { notificationsCollection } from '@lib/firebase/collections';
 import { query, where } from 'firebase/firestore';
 
+import * as SolidIcons from '@heroicons/react/24/solid';
+import * as OutlineIcons from '@heroicons/react/24/outline';
+
+export type IconName = keyof typeof SolidIcons | keyof typeof OutlineIcons;
+
 export type NavLink = {
   href: string;
   linkName: string;
@@ -31,8 +36,50 @@ export type NavLink = {
   disabled?: boolean;
   canBeHidden?: boolean;
   icon?: ReactNode;
+  iconName: IconName;
   count?: number;
 };
+
+const navLinks: Readonly<NavLink[]> = [
+  {
+    href: '/home',
+    linkName: 'Home',
+    iconName: 'HomeIcon',
+    icon: <CiHome size={34} />
+  },
+  {
+    href: '/explore',
+    linkName: 'Explorar',
+    iconName: 'HashtagIcon',
+    disabled: true,
+    canBeHidden: true,
+    icon: <CiHashtag size={34} />
+  },
+  {
+    href: '/notifications',
+    linkName: 'Notificações',
+    iconName: 'BellIcon',
+    disabled: false,
+    isNotification: true,
+    icon: <CiBellOn size={34} />
+  },
+  {
+    href: '/messages',
+    linkName: 'Mensagens',
+    iconName: 'EnvelopeIcon',
+    disabled: true,
+    icon: <CiMail size={34} />
+  },
+  {
+    href: '/bookmarks',
+    linkName: 'Babados',
+    iconName: 'BookmarkIcon',
+    canBeHidden: true,
+    icon: <CiBookmark size={34} />
+  }
+];
+
+export type NewNavLinks = Omit<NavLink, 'iconName'>
 
 export function Sidebar(): JSX.Element {
   const { user } = useAuth();
@@ -42,7 +89,7 @@ export function Sidebar(): JSX.Element {
 
   const username = user?.username as string;
 
-  const [navLinksWithCount, setNavLinksWithCount] = useState<NavLink[]>([
+  const [navLinksWithCount, setNavLinksWithCount] = useState<NewNavLinks[]>([
     {
       href: '/home',
       linkName: 'Home',
@@ -92,7 +139,7 @@ export function Sidebar(): JSX.Element {
   useEffect(() => {
     if(notifications) {
       setNavLinksWithCount((prevItems) => (
-        prevItems.map((link: NavLink) => 
+        prevItems.map((link: NewNavLinks) => 
           link.linkName === 'Notificações' ? { ...link, count: notifications.length } : link
         )
       ));
