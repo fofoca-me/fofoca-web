@@ -12,7 +12,7 @@ const PrivacyPolicy: React.FC = () => {
             src={'/logo-fofocame.png'}
         />
         <h1 className='text-3xl sm:text-4xl font-bold mb-6'>Política de Uso de Cookies</h1>
-      <p className='mb-4'>Última atualização: 7 de setembro de 2024</p>
+      <p className='mb-4'>Última atualização: 07 de setembro de 2024</p>
       <p className='mb-4'>
         A fofoca.me respeita a privacidade dos seus usuários e atualmente não
         faz uso de cookies próprios para rastreamento ou armazenamento de

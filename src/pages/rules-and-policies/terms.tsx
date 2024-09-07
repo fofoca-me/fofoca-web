@@ -12,7 +12,7 @@ const PrivacyPolicy: React.FC = () => {
             src={'/logo-fofocame.png'}
         />
         <h1 className='text-3xl sm:text-4xl font-bold mb-6'>Termos e Condições de Uso</h1>
-      <p className='mb-4'>Última atualização: 7 de setembro de 2024</p>
+      <p className='mb-4'>Última atualização: 07 de setembro de 2024</p>
       <h2 className='text-2xl font-semibold mb-2'>1. Uso da Plataforma</h2>
       <p className='mb-4'>
         O serviço fofoca.me permite que você publique mensagens curtas,
