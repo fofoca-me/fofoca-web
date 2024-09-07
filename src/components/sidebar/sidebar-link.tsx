@@ -3,26 +3,27 @@ import Link from 'next/link';
 import cn from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { preventBubbling } from '@lib/utils';
-import type { NavLink } from './sidebar';
+import type { NewNavLinks } from './sidebar';
+import { useAuth } from '@lib/context/auth-context';
 
-type SidebarLinkProps = NavLink & {
+type SidebarLinkProps = NewNavLinks & {
   username?: string;
-  count?: number;
 };
 
 export function SidebarLink({
   href,
   username,
   icon,
+  count,
   linkName,
   disabled,
-  count,
   canBeHidden
 }: SidebarLinkProps): JSX.Element {
   const { asPath } = useRouter();
-  const isActive = username ? asPath.includes(username) : asPath === href;
 
-  console.log(count);
+  const { user } = useAuth();
+
+  const isActive = username ? asPath.includes(username) : asPath === href;
 
   return (
     <Link href={href}>
@@ -43,10 +44,10 @@ export function SidebarLink({
             isActive && 'font-bold'
           )}
         >
-          {icon}
+          <div className={cn(isActive && 'text-main-accent')}>{icon}</div>
           <p className='hidden xl:block'>{linkName}</p>
           <AnimatePresence>
-            {count && count !== 0 ? (
+            {count && count > 0 && (
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -55,8 +56,6 @@ export function SidebarLink({
               >
                 <p className='text-xs text-black'>{count}</p>
               </motion.div>
-            ) : (
-              <></>
             )}
           </AnimatePresence>
         </div>

@@ -1,7 +1,7 @@
-import { useAuth } from '@lib/context/auth-context';
-import { NextImage } from '@components/ui/next-image';
-import { CustomIcon } from '@components/ui/custom-icon';
 import { Button } from '@components/ui/button';
+import { CustomIcon } from '@components/ui/custom-icon';
+import { NextImage } from '@components/ui/next-image';
+import { useAuth } from '@lib/context/auth-context';
 import Image from 'next/image';
 
 export function LoginMain(): JSX.Element {
@@ -12,15 +12,11 @@ export function LoginMain(): JSX.Element {
       <div className='relative hidden items-center justify-center  lg:flex'>
         <NextImage
           imgClassName='object-cover'
-          blurClassName='bg-accent-blue'
-          src='/assets/twitter-banner.png'
+          src='/assets/login-background.png'
           alt='Fofoca banner'
           layout='fill'
           useSkeleton
         />
-        <i className='absolute'>
-          <CustomIcon className='h-96 w-96 text-white' iconName='TwitterIcon' />
-        </i>
       </div>
       <div className='flex flex-col items-center justify-between gap-6 p-8 lg:items-start lg:justify-center'>
         <i className='mb-0 self-center lg:mb-10 lg:self-auto'>
@@ -33,8 +29,8 @@ export function LoginMain(): JSX.Element {
         </i>
         <div className='flex max-w-xs flex-col gap-4 font-twitter-chirp-extended lg:max-w-none lg:gap-16'>
           <h1
-            className='text-3xl before:content-["See_what’s_happening_in_the_world_right_now."] 
-                       lg:text-6xl lg:before:content-["Happening_now"]'
+            className='text-3xl before:content-["Aqui_você_pode_fofocar_a_vontade."] 
+                       lg:text-6xl lg:before:content-["Aqui_você_pode_fofocar_a_vontade."]'
           />
           <h2 className='hidden text-xl lg:block lg:text-3xl'>
             Cadastre-se no Fofoca hoje.
@@ -48,23 +44,23 @@ export function LoginMain(): JSX.Element {
                          dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
               onClick={signInWithGoogle}
             >
-              <CustomIcon iconName='GoogleIcon' /> Inscreva-se no Google
+              <CustomIcon iconName='GoogleIcon' /> Inscreva-se com Google
             </Button>
             <Button
               className='flex cursor-not-allowed justify-center gap-2 border border-light-line-reply font-bold text-light-primary
                          transition hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0
                          dark:bg-white dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
             >
-              <CustomIcon iconName='AppleIcon' /> Inscreva-se na Apple
+              <CustomIcon iconName='AppleIcon' /> Inscreva-se com Apple
             </Button>
 
             <p
               className='inner:custom-underline inner:custom-underline text-center text-xs
-                         text-light-secondary inner:text-accent-blue dark:text-dark-secondary'
+                         text-light-secondary inner:text-[#EF2182] dark:text-dark-secondary'
             >
               Ao se inscrever, você concorda com os{' '}
               <a
-                href='https://twitter.com/tos'
+                href='/rules-and-policies/terms'
                 target='_blank'
                 rel='noreferrer'
               >
@@ -72,7 +68,7 @@ export function LoginMain(): JSX.Element {
               </a>{' '}
               e{' '}
               <a
-                href='https://twitter.com/privacy'
+                href='/rules-and-policies/policy'
                 target='_blank'
                 rel='noreferrer'
               >
@@ -80,11 +76,11 @@ export function LoginMain(): JSX.Element {
               </a>
               , incluindo{' '}
               <a
-                href='https://help.twitter.com/rules-and-policies/twitter-cookies'
+                href='/rules-and-policies/cookies'
                 target='_blank'
                 rel='noreferrer'
               >
-                Uso de cookies
+                uso de cookies
               </a>
               .
             </p>
@@ -92,8 +88,8 @@ export function LoginMain(): JSX.Element {
           <div className='flex flex-col gap-3'>
             <p className='font-bold'>Já tem uma conta?</p>
             <Button
-              className='border border-light-line-reply font-bold text-accent-blue hover:bg-accent-blue/10
-                         focus-visible:bg-accent-blue/10 focus-visible:!ring-accent-blue/80 active:bg-accent-blue/20
+              className='border border-light-line-reply font-bold text-[#EF2182] hover:bg-[#EF2182]/10
+                         focus-visible:bg-[#EF2182]/10 focus-visible:!ring-[#EF2182]/80 active:bg-[#EF2182]/20
                          dark:border-light-secondary'
               onClick={signInWithGoogle}
             >

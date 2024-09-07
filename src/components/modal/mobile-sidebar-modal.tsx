@@ -42,11 +42,6 @@ const topNavLinks: Readonly<MobileNavLink[]> = [
     iconName: 'Bars3BottomLeftIcon',
     disabled: false
   },
-  {
-    href: '/people',
-    linkName: 'Fofoqueiros',
-    iconName: 'UserGroupIcon'
-  }
 ];
 
 const bottomNavLinks: Readonly<MobileNavLink[]> = [
