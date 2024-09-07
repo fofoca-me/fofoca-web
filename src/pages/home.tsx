@@ -60,7 +60,9 @@ export default function Home(): JSX.Element {
         <button
           onClick={() => setShowAllUsers(false)}
           className={`rounded-full px-4 py-2 ${
-            !showAllUsers ? 'bg-pink-500 text-white' : 'bg-pink-300 text-white'
+            !showAllUsers
+              ? 'bg-pink-500 text-white'
+              : 'bg-pink-300 text-white hover:bg-pink-400'
           }`}
         >
           Chegados

@@ -6,8 +6,12 @@ import type { NotificationWithUser } from '@lib/types/notification';
 
 const placeholder = {
   follower: {
-    title: 'Um novo Fofoqueiro seguiu você!',
-    description: 'Agora o #name tá acompanhando tuas fofocas de pertinho'
+    title: 'Um novo fofoqueiro seguiu você!',
+    description: 'Agora #name tá acompanhando(a) tuas fofocas de pertinho'
+  },
+  liked: {
+    title: 'Alguém curtiu sua fofoca.',
+    description: '#name tá adorando o que tu tá falando'
   }
 };
 
@@ -36,8 +40,6 @@ export const NotificationTypes = (notification: NotificationWithUser) => {
       name: notification.user.name
     }) as typeof placeholderProp),
     image_url: notification.user.photoURL,
-    url: `${process.env.NEXT_PUBLIC_URL as string}/user/${
-      notification.user.username
-    }`
+    url: `/user/${notification.user.username}`
   };
 };
