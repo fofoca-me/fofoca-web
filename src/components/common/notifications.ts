@@ -6,7 +6,7 @@ import type { NotificationWithUser } from '@lib/types/notification';
 
 const placeholder = {
   follower: {
-    title: 'Um novo usuário seguiu você!',
+    title: 'Um novo Fofoqueiro seguiu você!',
     description: 'Agora o #name tá acompanhando tuas fofocas de pertinho'
   }
 };
