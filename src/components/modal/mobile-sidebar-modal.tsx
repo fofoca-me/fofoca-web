@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { CiHashtag } from 'react-icons/ci';
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { Button } from '@components/ui/button';
@@ -24,15 +25,22 @@ const topNavLinks: Readonly<MobileNavLink[]> = [
     iconName: 'ChatBubbleBottomCenterTextIcon'
   },
   {
+    href: '/explore',
+    linkName: 'Bisbilhotar',
+    iconName: 'HashtagIcon',
+    disabled: false,
+    icon: <CiHashtag size={34} />
+  },
+  {
     href: '/bookmarks',
     linkName: 'Babados',
     iconName: 'BookmarkIcon'
   },
   {
-    href: '/lists',
-    linkName: 'Listas',
+    href: '/search',
+    linkName: 'Pesquisar',
     iconName: 'Bars3BottomLeftIcon',
-    disabled: true
+    disabled: false
   },
   {
     href: '/people',

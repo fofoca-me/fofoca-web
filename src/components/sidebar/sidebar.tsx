@@ -8,6 +8,7 @@ import {
   CiTextAlignLeft,
   CiUser
 } from 'react-icons/ci';
+import Image from 'next/image';
 import { useAuth } from '@lib/context/auth-context';
 import { useWindow } from '@lib/context/window-context';
 import { useModal } from '@lib/hooks/useModal';
@@ -18,10 +19,9 @@ import { Button } from '@components/ui/button';
 import { SidebarLink } from './sidebar-link';
 import { MoreSettings } from './more-settings';
 import { SidebarProfile } from './sidebar-profile';
+import { SidebarLinkWrapper } from './sidebar-wrapper';
 import type { ReactNode } from 'react';
 import type { IconName } from '@components/ui/hero-icon';
-import { SidebarLinkWrapper } from './sidebar-wrapper';
-import Image from 'next/image';
 
 export type NavLink = {
   href: string;
@@ -42,7 +42,7 @@ const navLinks: Readonly<NavLink[]> = [
   },
   {
     href: '/explore',
-    linkName: 'Explorar',
+    linkName: 'Bisbilhotar',
     iconName: 'HashtagIcon',
     disabled: true,
     canBeHidden: true,
@@ -71,10 +71,10 @@ const navLinks: Readonly<NavLink[]> = [
     icon: <CiBookmark size={34} />
   },
   {
-    href: '/lists',
-    linkName: 'Listas',
+    href: '/search',
+    linkName: 'Pesquisar',
     iconName: 'Bars3BottomLeftIcon',
-    disabled: true,
+    disabled: false,
     canBeHidden: true,
     icon: <CiTextAlignLeft size={34} />
   }

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import { useRequireAuth } from '@lib/hooks/useRequireAuth';
 import { Aside } from '@components/aside/aside';
 import { AsideTrends } from '@components/aside/aside-trends';
@@ -53,6 +54,17 @@ export function TrendsLayout({ children }: LayoutProps): JSX.Element {
 }
 
 export function PeopleLayout({ children }: LayoutProps): JSX.Element {
+  return (
+    <>
+      {children}
+      <Aside>
+        <AsideTrends />
+      </Aside>
+    </>
+  );
+}
+
+export function ExploreLayout({ children }: LayoutProps): JSX.Element {
   return (
     <>
       {children}
