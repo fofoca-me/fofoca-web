@@ -1,12 +1,9 @@
 const footerLinks = [
-  ['Termos de Serviço', 'https://twitter.com/tos'],
-  ['Política de Privacidade', 'https://twitter.com/privacy'],
-  ['Política de Cookies', 'https://support.twitter.com/articles/20170514'],
-  ['Acessibilidade', 'https://help.twitter.com/resources/accessibility'],
-  [
-    'Ads Info',
-    'https://business.twitter.com/en/help/troubleshooting/how-twitter-ads-work.html'
-  ]
+  ['Home', 'https://fofoca.me'],
+  ['Contato', 'mailto:contato@fofoca.me'],
+  ['Política de Privacidade', 'https://google.com.br'],
+  ['Política de Cookies', 'https://google.com.br'],
+  ['Termos de uso', 'https://google.com.br']
 ] as const;
 
 export function AsideFooter(): JSX.Element {
