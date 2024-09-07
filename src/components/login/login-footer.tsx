@@ -1,6 +1,6 @@
 const footerLinks = [
   // ['About', 'https://about.twitter.com'],
-  ['Ajuda', 'https://fofoca.me/help'],
+  ['Ajuda', '/help'],
   ['Política de Privacidade', '/rules-and-policies/policy']
   // ['Cookie Policy', 'https://support.twitter.com/articles/20170514'],
   // ['Accessibility', 'https://help.twitter.com/resources/accessibility'],

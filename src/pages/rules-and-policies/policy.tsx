@@ -482,13 +482,13 @@ export default function Policy(): JSX.Element {
   const [activeLink, setActiveLink] = useState<string>('');
 
   return (
-    <div className='grid min-h-screen grid-rows-[1fr,auto] gap-12 px-52'>
+    <div className='grid min-h-screen grid-rows-[1fr,auto] items-start gap-12 px-52'>
       <SEO
         title='Fofoca-me - A nossa rede social!'
         description='Na Fofoca.me, levamos a sua privacidade a sério. Confira nossa Política de Privacidade para saber como coletamos, utilizamos e protegemos seus dados pessoais. Garantimos transparência e segurança no tratamento de suas informações. Saiba mais sobre seus direitos e como gerenciar suas preferências de privacidade.'
       />
 
-      <header className='sticky top-0 z-10 flex items-start items-center gap-2 bg-black'>
+      <header className='sticky top-0 z-10 flex items-center gap-2 bg-black'>
         <i className='!m-0 self-center lg:mb-10 lg:self-auto'>
           <Link href='/'>
             <Image
