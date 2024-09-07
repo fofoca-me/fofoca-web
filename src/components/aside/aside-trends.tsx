@@ -19,45 +19,33 @@ export const variants: MotionProps = {
   transition: { duration: 0.8 }
 };
 
-type AsideTrendsProps = {
-  inTrendsPage?: boolean;
-};
-
-export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
+export function AsideTrends(): JSX.Element {
   const { data, loading } = useCollection(
     query(
       trendsCollection,
       orderBy('counter', 'desc'),
-      ...(inTrendsPage ? [] : [limit(3)])
+      ...([limit(3)])
     ),
     { allowNull: true, includeUser: true }
   );
 
   return (
-    <section
-      className={cn(
-        !inTrendsPage &&
-          'hover-animation rounded-md border border-gray-200 bg-white shadow-md dark:border-main-background dark:bg-zinc-900'
-      )}
-    >
+    <section className='bg-white rounded-md shadow-md  border border-gray-200 dark:bg-zinc-900 dark:border-main-background'>
       {loading ? (
         <Loading />
       ) : data ? (
         <motion.div
-          className={cn('inner:px-4 inner:py-3', inTrendsPage && 'mt-0.5')}
+          className={cn('inner:px-4 inner')}
           {...variants}
         >
-          {!inTrendsPage && (
-            <h2 className='text-xl font-extrabold'>Tendências para você</h2>
-          )}
+          <h2 className='text-xl font-extrabold py-3'>Tendências para você</h2>
           {data.map(({ text, counter, user: { name } }) => (
-            <Link href={''} key={text}>
+            <Link href={''} key={text} className='hover-animation accent-tab hover-card relative px-4 py-3 block'>
               <span
-                className='hover-animation accent-tab hover-card relative 
-                           flex  flex-col gap-0.5 px-4'
+                className='flex  flex-col gap-0.5'
                 onClick={preventBubbling()}
               >
-                <div className='absolute right-2 top-2'>
+                <div className='absolute right-2 top-2 hidden'>
                   <Button
                     className='hover-animation group relative  p-2
                                hover:bg-accent-blue/10 focus-visible:bg-accent-blue/20 
@@ -85,16 +73,10 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
               </span>
             </Link>
           ))}
-          {!inTrendsPage && (
-            <Link href='/trends'>
-              <span
-                className='custom-button accent-tab hover-card block w-full rounded-2xl
-                           rounded-t-none text-center text-main-accent'
-              >
-                Mostrar mais
-              </span>
-            </Link>
-          )}
+          <Link href='/trends' className='custom-button py-4 accent-tab hover-card block w-full rounded-2xl
+          rounded-t-none text-center text-main-accent'>
+            Mostrar mais
+          </Link>
         </motion.div>
       ) : (
         <Error />
