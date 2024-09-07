@@ -28,6 +28,7 @@ import * as SolidIcons from '@heroicons/react/24/solid';
 import * as OutlineIcons from '@heroicons/react/24/outline';
 
 export type IconName = keyof typeof SolidIcons | keyof typeof OutlineIcons;
+import { usePathname } from 'next/navigation';
 
 export type NavLink = {
   href: string;
@@ -67,7 +68,7 @@ const navLinks: Readonly<NavLink[]> = [
     href: '/messages',
     linkName: 'Mensagens',
     iconName: 'EnvelopeIcon',
-    disabled: true,
+    disabled: false,
     icon: <CiMail size={34} />
   },
   {
@@ -84,6 +85,7 @@ export type NewNavLinks = Omit<NavLink, 'iconName'>
 export function Sidebar(): JSX.Element {
   const { user } = useAuth();
   const { isMobile } = useWindow();
+  const path = usePathname();
 
   const { open, openModal, closeModal } = useModal();
 
@@ -194,18 +196,20 @@ export function Sidebar(): JSX.Element {
             />
             {!isMobile && <MoreSettings />}
           </nav>
-          <Button
-            className='accent-tab absolute right-4 -translate-y-[72px] bg-main-accent text-lg font-bold text-white
+          {!path.includes('messages/') && (
+            <Button
+              className='accent-tab absolute right-4 -translate-y-[72px] bg-main-accent text-lg font-bold text-white
                        outline-none transition hover:brightness-90 active:brightness-75 xs:static xs:translate-y-0
                        xs:hover:bg-main-accent/90 xs:active:bg-main-accent/75 xl:w-11/12'
-            onClick={openModal}
-          >
-            <CustomIcon
-              className='block h-6 w-6 xl:hidden'
-              iconName='FeatherIcon'
-            />
-            <p className='hidden xl:block'>Fofocar</p>
-          </Button>
+              onClick={openModal}
+            >
+              <CustomIcon
+                className='block h-6 w-6 xl:hidden'
+                iconName='FeatherIcon'
+              />
+              <p className='hidden xl:block'>Fofocar</p>
+            </Button>
+          )}
         </section>
         {!isMobile && <SidebarProfile />}
       </div>
