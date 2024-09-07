@@ -12,7 +12,6 @@ export function LoginMain(): JSX.Element {
       <div className='relative hidden items-center justify-center  lg:flex'>
         <NextImage
           imgClassName='object-cover'
-          blurClassName='bg-accent-blue'
           src='/assets/login-background.png'
           alt='Fofoca banner'
           layout='fill'
@@ -57,7 +56,7 @@ export function LoginMain(): JSX.Element {
 
             <p
               className='inner:custom-underline inner:custom-underline text-center text-xs
-                         text-light-secondary inner:text-accent-blue dark:text-dark-secondary'
+                         text-light-secondary inner:text-[#EF2182] dark:text-dark-secondary'
             >
               Ao se inscrever, você concorda com os{' '}
               <a
@@ -89,8 +88,8 @@ export function LoginMain(): JSX.Element {
           <div className='flex flex-col gap-3'>
             <p className='font-bold'>Já tem uma conta?</p>
             <Button
-              className='border border-light-line-reply font-bold text-accent-blue hover:bg-accent-blue/10
-                         focus-visible:bg-accent-blue/10 focus-visible:!ring-accent-blue/80 active:bg-accent-blue/20
+              className='border border-light-line-reply font-bold text-[#EF2182] hover:bg-[#EF2182]/10
+                         focus-visible:bg-[#EF2182]/10 focus-visible:!ring-[#EF2182]/80 active:bg-[#EF2182]/20
                          dark:border-light-secondary'
               onClick={signInWithGoogle}
             >
