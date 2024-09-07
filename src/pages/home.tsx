@@ -76,7 +76,7 @@ export default function Home(): JSX.Element {
           Nunca nem vi
         </button>
       </section>
-
+        
       <section className='mt-0.5 py-4 xs:mt-0'>
         {loading ? (
           <Loading className='mt-5' />
