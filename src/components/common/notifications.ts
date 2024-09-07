@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -15,8 +17,11 @@ const placeholder = {
   }
 };
 
-const ReplaceParams = (toReplace: object, replace: object): object => {
-  const result: any = { ...toReplace };
+const ReplaceParams = (
+  toReplace: Record<string, string>,
+  replace: object
+): unknown => {
+  const result: Record<string, string> = { ...toReplace };
 
   Object.keys(toReplace).forEach((key) => {
     if (typeof toReplace[key as keyof typeof toReplace] === 'string')
@@ -35,10 +40,12 @@ export const NotificationTypes = (notification: NotificationWithUser) => {
   const placeholderProp =
     placeholder[notification.type as keyof typeof placeholder];
 
+  const userInfo = ReplaceParams(placeholderProp, {
+    name: notification.user.name
+  }) as typeof placeholderProp;
+
   return {
-    ...(ReplaceParams(placeholderProp, {
-      name: notification.user.name
-    }) as typeof placeholderProp),
+    ...userInfo,
     image_url: notification.user.photoURL,
     url: `/user/${notification.user.username}`
   };
