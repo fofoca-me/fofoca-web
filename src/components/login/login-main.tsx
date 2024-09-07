@@ -60,7 +60,7 @@ export function LoginMain(): JSX.Element {
             >
               Ao se inscrever, você concorda com os{' '}
               <a
-                href='https://twitter.com/tos'
+                href='https://fofoca.me/terms'
                 target='_blank'
                 rel='noreferrer'
               >
@@ -68,7 +68,7 @@ export function LoginMain(): JSX.Element {
               </a>{' '}
               e{' '}
               <a
-                href='https://twitter.com/privacy'
+                href='https://fofoca.me/policy'
                 target='_blank'
                 rel='noreferrer'
               >
@@ -76,11 +76,12 @@ export function LoginMain(): JSX.Element {
               </a>
               , incluindo{' '}
               <a
-                href='https://help.twitter.com/rules-and-policies/twitter-cookies'
+                href='#'
                 target='_blank'
                 rel='noreferrer'
+                className='pointer-events-none'
               >
-                Uso de cookies
+                uso de cookies
               </a>
               .
             </p>
