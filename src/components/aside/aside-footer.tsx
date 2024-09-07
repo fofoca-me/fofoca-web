@@ -28,7 +28,7 @@ export function AsideFooter(): JSX.Element {
           </a>
         ))}
       </nav>
-      <p>© 2024 Fofoca, Inc.</p>
+      <p>© 2024 Fofoca.me</p>
     </footer>
   );
 }
