@@ -1,4 +1,11 @@
-import { query, where, orderBy, startAt, endAt } from 'firebase/firestore';
+import {
+  query,
+  where,
+  orderBy,
+  startAt,
+  endAt,
+  limit
+} from 'firebase/firestore';
 import { useEffect, useState, type ReactElement, type ReactNode } from 'react';
 import { useCollection } from '@lib/hooks/useCollection';
 import { usersCollection } from '@lib/firebase/collections';
@@ -14,13 +21,12 @@ import { UserCard } from '@components/user/user-card';
 import { UserSearchBar } from '@components/user/user-search';
 import { MainHeader } from '@components/home/main-header';
 import type { User } from '@lib/types/user';
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 
-const UsersList:React.FC<{users: User[]}> = ({users}) =>{
-
-  if(users.length === 0){
-    return (
-      <p className='text-center'>Nenhum usuário encontrado</p>
-    );
+const UsersList: React.FC<{ users: User[] }> = ({ users }) => {
+  if (users.length === 0) {
+    return <p className='text-center'>Nenhum usuário encontrado</p>;
   }
 
   return (
@@ -32,12 +38,26 @@ const UsersList:React.FC<{users: User[]}> = ({users}) =>{
   );
 };
 
+const defaultTableParams = {
+  filter: ''
+};
+
 export default function SearchPage(): JSX.Element {
-  const [input, setInput] = useState('');
+  const router = useRouter();
+  const { q } = router.query;
+  const [input, setInput] = useState((q as string) ?? '');
+
   const [dataUsers, setDataUsers] = useState<User[]>([]);
 
   const { user } = useAuth();
   const debouncedInput = useDebounce(input, 500);
+
+  useEffect(() => {
+    void router.push({
+      pathname: router.pathname,
+      query: { ...router.query, q: debouncedInput }
+    });
+  }, [debouncedInput]);
 
   const { data: usersData, loading } = useCollection(
     query(
@@ -45,7 +65,8 @@ export default function SearchPage(): JSX.Element {
       where('username', '!=', user?.username),
       orderBy('username'),
       startAt(debouncedInput),
-      endAt(debouncedInput + '\uf8ff')
+      endAt(debouncedInput + '\uf8ff'),
+      limit(5)
     ),
     { allowNull: true }
   );
@@ -64,15 +85,14 @@ export default function SearchPage(): JSX.Element {
         useMobileSidebar
         title='Pesquisar'
         className='flex items-center justify-between'
-      >
-      </MainHeader>
+      ></MainHeader>
 
       <div className='container mx-auto py-4'>
         <UserSearchBar
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <section className='mt-4 py-2 card-base'>
+        <section className='card-base mt-4 py-2'>
           {loading ? (
             <p className='p-5 text-center'>Carregando usuários...</p>
           ) : (

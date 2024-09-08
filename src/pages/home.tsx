@@ -1,6 +1,7 @@
 import { SEO } from '@components/common/seo';
 import { MainContainer } from '@components/home/main-container';
 import { MainHeader } from '@components/home/main-header';
+import { UpdateUsername } from '@components/home/update-username';
 import { Input } from '@components/input/input';
 import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
@@ -13,7 +14,6 @@ import { useInfiniteScroll } from '@lib/hooks/useInfiniteScroll';
 import { orderBy, where } from 'firebase/firestore';
 import { AnimatePresence } from 'framer-motion';
 import type { ReactElement, ReactNode } from 'react';
-import { UpdateUsername } from '@components/ui/home/update-username';
 
 export default function Home(): JSX.Element {
   const { isMobile } = useWindow();
