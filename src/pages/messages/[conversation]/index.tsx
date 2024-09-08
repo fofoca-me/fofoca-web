@@ -132,8 +132,8 @@ export default function MessagePage(): JSX.Element {
                   >
                     <div className={`border-8 border-t-transparent border-b-main-accent 
                         ${message.userId === user?.id
-                          ? 'border-r-transparent border-l-main-accent rounded-r-md'
-                          : 'border-l-transparent border-r-main-accent rounded-l-md'
+                          ? 'border-r-transparent border-l-main-accent rounded-r-lg'
+                          : 'border-l-transparent border-r-main-accent rounded-l-lg'
                         }
                       `}>
                       {message.userId !== user?.id && (
@@ -141,7 +141,7 @@ export default function MessagePage(): JSX.Element {
                       )}
                     </div>
                     <div
-                      className={`rounded-md px-2 py-1 border-2 border-main-accent ${
+                      className={`rounded-md max-w-[80%] px-2 py-1 border-2 border-main-accent ${
                         message.userId === user?.id
                           ? 'bg-main-accent text-white rounded-br-none '
                           : 'bg-main-secondary text-main-accent rounded-bl-none '
