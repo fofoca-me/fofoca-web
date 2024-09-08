@@ -36,17 +36,20 @@ export function Suggestions(): JSX.Element {
   );
 
   return (
-    <section className='hover-animation rounded-md shadow-md bg-white border border-gray-200 dark:bg-zinc-900 dark:border-main-background'>
+    <section className='hover-animation rounded-md border border-gray-200 bg-white shadow-md dark:border-main-background dark:bg-zinc-900'>
       {adminLoading || suggestionsLoading ? (
         <Loading className='flex h-52 items-center justify-center p-4' />
       ) : suggestionsData ? (
         <motion.div className='inner:px-4' {...variants}>
-          <h2 className='text-xl font-bold py-3'>Quem seguir</h2>
+          <h2 className='py-3 text-xl font-bold'>Quem seguir</h2>
           {adminData && <UserCard {...adminData} />}
           {suggestionsData?.map((userData) => (
             <UserCard {...userData} key={userData.id} />
           ))}
-          <Link href='/people' className='custom-button accent-tab hover-card block w-full rounded-t-none py-4 text-center text-main-accent'>
+          <Link
+            href='/search'
+            className='custom-button accent-tab hover-card block w-full rounded-t-none py-4 text-center text-main-accent'
+          >
             Mostrar mais
           </Link>
         </motion.div>

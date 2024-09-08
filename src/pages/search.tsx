@@ -1,12 +1,5 @@
-import {
-  limit,
-  query,
-  where,
-  orderBy,
-  startAt,
-  endAt
-} from 'firebase/firestore';
-import { useEffect, useState, type ReactElement, type ReactNode } from 'react';
+import { query, orderBy, startAt, endAt } from 'firebase/firestore';
+import { useState, type ReactElement, type ReactNode } from 'react';
 import { useCollection } from '@lib/hooks/useCollection';
 import { usersCollection } from '@lib/firebase/collections';
 import { useDebounce } from '@lib/hooks/useDebounce';
@@ -20,15 +13,12 @@ import { UserCard } from '@components/user/user-card';
 import { UserSearchBar } from '@components/user/user-search';
 import { MainHeader } from '@components/home/main-header';
 import { UpdateUsername } from '@components/home/update-username';
-import type { User } from '@lib/types/user';
 
-export default function Pesquisar(): JSX.Element {
+export default function SearchPage(): JSX.Element {
   const [input, setInput] = useState('');
-  const [dataUsers, setDataUsers] = useState<User[]>([]);
-
   const debouncedInput = useDebounce(input, 500);
 
-  const { data: usersData, loading } = useCollection(
+  const { data, loading } = useCollection(
     query(
       usersCollection,
       orderBy('username'),
@@ -37,10 +27,6 @@ export default function Pesquisar(): JSX.Element {
     ),
     { allowNull: true }
   );
-
-  useEffect(() => {
-    if (usersData) setDataUsers(usersData);
-  }, [usersData]);
 
   return (
     <MainContainer>
@@ -60,11 +46,11 @@ export default function Pesquisar(): JSX.Element {
         <section className='mt-6'>
           {loading ? (
             <p>Carregando usuários...</p>
-          ) : usersData?.length === 0 ? (
+          ) : data?.length === 0 ? (
             <p className='text-center'>Nenhum usuário encontrado</p>
           ) : (
             <div>
-              {dataUsers?.map((user) => (
+              {data?.map((user) => (
                 <UserCard key={user?.id} {...user} />
               ))}
             </div>
@@ -75,7 +61,7 @@ export default function Pesquisar(): JSX.Element {
   );
 }
 
-Pesquisar.getLayout = (page: ReactElement): ReactNode => (
+SearchPage.getLayout = (page: ReactElement): ReactNode => (
   <ProtectedLayout>
     <MainLayout>
       <ExploreLayout>{page}</ExploreLayout>
