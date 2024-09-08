@@ -10,7 +10,7 @@ import { MainContainer } from '@components/home/main-container';
 import { Button } from '@components/ui/button';
 import { ToolTip } from '@components/ui/tooltip';
 import { HeroIcon } from '@components/ui/hero-icon';
-import { MessageTable } from '@components/message/page';
+import { MessageTable } from '@components/message/messageList';
 import type { ReactElement, ReactNode } from 'react';
 
 export default function Conversation(): JSX.Element {
@@ -20,13 +20,13 @@ export default function Conversation(): JSX.Element {
     <MainContainer>
       <SEO title='Mensagens / Fofoca.me' />
       <MainHeader useActionButton title='Mensagens' action={back}>
-        <Button
+        {/* <Button
           className='dark-bg-tab group relative ml-auto cursor-not-allowed p-2 hover:bg-light-primary/10
                      active:bg-light-primary/20 dark:hover:bg-dark-primary/10 dark:active:bg-dark-primary/20'
         >
           <HeroIcon className='h-5 w-5' iconName='Cog8ToothIcon' />
           <ToolTip tip='Settings' />
-        </Button>
+        </Button> */}
       </MainHeader>
 
       <MessageTable />
