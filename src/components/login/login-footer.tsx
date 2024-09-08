@@ -35,7 +35,7 @@ export function LoginFooter(): JSX.Element {
             {linkName}
           </a>
         ))}
-        <p>© 2024 Fofoca</p>
+        <p>© 2024 Fofoca.me</p>
       </nav>
     </footer>
   );
