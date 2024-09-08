@@ -30,7 +30,7 @@ export default function Home(): JSX.Element {
 
       <MainHeader
         useMobileSidebar
-        title='Só fuxico'
+        title='Só fuxico.'
         className='flex items-center justify-between'
       >
         <UpdateUsername />
