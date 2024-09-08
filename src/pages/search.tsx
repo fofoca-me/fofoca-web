@@ -20,10 +20,11 @@ import { UserCard } from '@components/user/user-card';
 import { UserSearchBar } from '@components/user/user-search';
 import { MainHeader } from '@components/home/main-header';
 import { UpdateUsername } from '@components/home/update-username';
+import type { User } from '@lib/types/user';
 
 export default function Pesquisar(): JSX.Element {
   const [input, setInput] = useState('');
-  const [dataTest, setDataTes] = useState<any[]>([]);
+  const [dataUsers, setDataUsers] = useState<User[]>([]);
 
   const debouncedInput = useDebounce(input, 500);
 
@@ -38,7 +39,7 @@ export default function Pesquisar(): JSX.Element {
   );
 
   useEffect(() => {
-    if (usersData) setDataTes(usersData);
+    if (usersData) setDataUsers(usersData);
   }, [usersData]);
 
   return (
@@ -63,7 +64,7 @@ export default function Pesquisar(): JSX.Element {
             <p className='text-center'>Nenhum usuário encontrado</p>
           ) : (
             <div>
-              {dataTest?.map((user) => (
+              {dataUsers?.map((user) => (
                 <UserCard key={user?.id} {...user} />
               ))}
             </div>
