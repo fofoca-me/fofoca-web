@@ -1,31 +1,31 @@
-import { useMemo } from 'react';
-import { useRouter } from 'next/router';
-import { doc, getDoc } from 'firebase/firestore';
+import { ActionModal } from '@components/modal/action-modal';
+import { Modal } from '@components/modal/modal';
+import { Button } from '@components/ui/button';
+import { CustomIcon } from '@components/ui/custom-icon';
+import { HeroIcon } from '@components/ui/hero-icon';
+import { ToolTip } from '@components/ui/tooltip';
 import { Popover } from '@headlessui/react';
-import { AnimatePresence, motion } from 'framer-motion';
-import cn from 'clsx';
-import { toast } from 'react-hot-toast';
 import { useAuth } from '@lib/context/auth-context';
-import { useModal } from '@lib/hooks/useModal';
 import { tweetsCollection } from '@lib/firebase/collections';
 import {
-  removeTweet,
-  manageReply,
   manageFollow,
   managePinnedTweet,
+  manageReply,
+  manageTotalPhotos,
   manageTotalTweets,
-  manageTotalPhotos
+  removeTweet
 } from '@lib/firebase/utils';
-import { delayScroll, preventBubbling, sleep } from '@lib/utils';
-import { Modal } from '@components/modal/modal';
-import { ActionModal } from '@components/modal/action-modal';
-import { Button } from '@components/ui/button';
-import { ToolTip } from '@components/ui/tooltip';
-import { HeroIcon } from '@components/ui/hero-icon';
-import { CustomIcon } from '@components/ui/custom-icon';
-import type { Variants } from 'framer-motion';
+import { useModal } from '@lib/hooks/useModal';
 import type { Tweet } from '@lib/types/tweet';
 import type { User } from '@lib/types/user';
+import { delayScroll, preventBubbling, sleep } from '@lib/utils';
+import cn from 'clsx';
+import { doc, getDoc } from 'firebase/firestore';
+import type { Variants } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useRouter } from 'next/router';
+import { useMemo } from 'react';
+import { toast } from 'react-hot-toast';
 
 export const variants: Variants = {
   initial: { opacity: 0, y: -25 },
@@ -51,13 +51,13 @@ type PinModalData = Record<'title' | 'description' | 'mainBtnLabel', string>;
 
 const pinModalData: Readonly<PinModalData[]> = [
   {
-    title: 'Fixar tweet no perfil?',
+    title: 'Fixar fofoca no perfil?',
     description:
-      'Isso aparecerá no topo do seu perfil e substituirá qualquer tweet fixado anteriormente.',
+      'Isso aparecerá no topo do seu perfil e substituirá qualquer fofoca fixado anteriormente.',
     mainBtnLabel: 'Fixar'
   },
   {
-    title: 'Desafixar tweet do perfil?',
+    title: 'Desafixar fofoca do perfil?',
     description:
       'Isso não aparecerá mais automaticamente no topo do seu perfil.',
     mainBtnLabel: 'Desafixar'
@@ -113,7 +113,7 @@ export function TweetActions({
     ]);
 
     toast.success(
-      `${isInAdminControl ? `@${username}'s` : 'Seu'} Tweet foi excluído`
+      `${isInAdminControl ? `@${username}'s` : 'Sua'} fofoca foi excluída`
     );
 
     removeCloseModal();
@@ -123,7 +123,7 @@ export function TweetActions({
     await managePinnedTweet(tweetIsPinned ? 'unpin' : 'pin', userId, tweetId);
     toast.success(
       `Sua fofoca foi ${
-        tweetIsPinned ? 'desafixada' : 'fizada'
+        tweetIsPinned ? 'desafixada' : 'fixada'
       } para o seu perfil`
     );
     pinCloseModal();
@@ -160,12 +160,12 @@ export function TweetActions({
         closeModal={removeCloseModal}
       >
         <ActionModal
-          title='Delete Tweet?'
-          description={`This can’t be undone and it will be removed from ${
-            isInAdminControl ? `@${username}'s` : 'your'
-          } profile, the timeline of any accounts that follow ${
-            isInAdminControl ? `@${username}` : 'you'
-          }, and from Twitter search results.`}
+          title='Deletar Fofoca?'
+          description={`Isso não pode ser desfeito e será removido do seu perfil ${
+            isInAdminControl ? `@${username}'s` : ''
+          }, da linha do tempo de todas as pessoas que o seguem ${
+            isInAdminControl ? `@${username}` : ''
+          }, e dos resultados de pesquisa do Fofoca.me.`}
           mainBtnClassName='bg-accent-red hover:bg-accent-red/90 active:bg-accent-red/75 accent-tab
                             focus-visible:bg-accent-red/90'
           mainBtnLabel='Delete'

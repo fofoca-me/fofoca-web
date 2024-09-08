@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { useState, useEffect } from 'react';
-import { toast } from 'react-hot-toast';
-import { checkUsernameAvailability, updateUsername } from '@lib/firebase/utils';
-import { useAuth } from '@lib/context/auth-context';
-import { useModal } from '@lib/hooks/useModal';
-import { isValidUsername } from '@lib/validation';
-import { sleep } from '@lib/utils';
+import { InputField } from '@components/input/input-field';
+import { Modal } from '@components/modal/modal';
+import { UsernameModal } from '@components/modal/username-modal';
 import { Button } from '@components/ui/button';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { ToolTip } from '@components/ui/tooltip';
-import { Modal } from '@components/modal/modal';
-import { UsernameModal } from '@components/modal/username-modal';
-import { InputField } from '@components/input/input-field';
-import type { FormEvent, ChangeEvent } from 'react';
+import { useAuth } from '@lib/context/auth-context';
+import { checkUsernameAvailability, updateUsername } from '@lib/firebase/utils';
+import { useModal } from '@lib/hooks/useModal';
+import { sleep } from '@lib/utils';
+import { isValidUsername } from '@lib/validation';
+import type { ChangeEvent, FormEvent } from 'react';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 export function UpdateUsername(): JSX.Element {
   const [alreadySet, setAlreadySet] = useState(false);
@@ -128,7 +128,7 @@ export function UpdateUsername(): JSX.Element {
         onClick={openModal}
       >
         <HeroIcon className='h-5 w-5' iconName='SparklesIcon' />
-        <ToolTip tip='Top tweets' />
+        <ToolTip tip='Top fofocas' />
       </Button>
     </>
   );

@@ -1,32 +1,32 @@
-import { useState, useEffect, useContext, createContext, useMemo } from 'react';
+import { auth } from '@lib/firebase/app';
 import {
-  signInWithPopup,
+  userBookmarksCollection,
+  usersCollection,
+  userStatsCollection
+} from '@lib/firebase/collections';
+import { checkUsernameAvailability } from '@lib/firebase/utils';
+import { getRandomId, getRandomInt } from '@lib/random';
+import type { Bookmark } from '@lib/types/bookmark';
+import type { Stats } from '@lib/types/stats';
+import type { User } from '@lib/types/user';
+import type { User as AuthUser } from 'firebase/auth';
+import {
   GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithPopup,
   signOut as signOutFirebase
 } from 'firebase/auth';
+import type { WithFieldValue } from 'firebase/firestore';
 import {
   doc,
   getDoc,
-  setDoc,
   onSnapshot,
-  serverTimestamp
+  serverTimestamp,
+  setDoc
 } from 'firebase/firestore';
 import nookies from 'nookies';
-import { auth } from '@lib/firebase/app';
-import {
-  usersCollection,
-  userStatsCollection,
-  userBookmarksCollection
-} from '@lib/firebase/collections';
-import { getRandomId, getRandomInt } from '@lib/random';
-import { checkUsernameAvailability } from '@lib/firebase/utils';
 import type { ReactNode } from 'react';
-import type { User as AuthUser } from 'firebase/auth';
-import type { WithFieldValue } from 'firebase/firestore';
-import type { User } from '@lib/types/user';
-import type { Bookmark } from '@lib/types/bookmark';
-import type { Stats } from '@lib/types/stats';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 type AuthContext = {
   user: User | null;
@@ -87,7 +87,7 @@ export function AuthContextProvider({
           accent: null,
           website: null,
           location: null,
-          photoURL: photoURL ?? '/assets/twitter-avatar.jpg',
+          photoURL: photoURL ?? '/logo192.png',
           username: randomUsername,
           verified: false,
           following: [],

@@ -1,6 +1,6 @@
 import { createTransport } from 'nodemailer';
-import { firestore, functions, regionalFunctions } from './lib/utils';
 import { EMAIL_API, EMAIL_API_PASSWORD, TARGET_EMAIL } from './lib/env';
+import { firestore, functions, regionalFunctions } from './lib/utils';
 import type { Tweet, User } from './types';
 
 export const notifyEmail = regionalFunctions.firestore
@@ -26,13 +26,13 @@ export const notifyEmail = regionalFunctions.firestore
 
     const tweetLink = `https://twitter-clone-ccrsxx.vercel.app/tweet/${snapshot.id}`;
 
-    const emailHeader = `New Tweet${
-      parent ? ' reply' : ''
-    } from ${name} (@${username})`;
+    const emailHeader = `Nova Fofoca${
+      parent ? ' responder' : ''
+    } de ${name} (@${username})`;
 
-    const emailText = `${text ?? 'No text provided'}${
+    const emailText = `${text ?? 'Sem fofoca'}${
       images ? ` (${imagesLength} image${imagesLength > 1 ? 's' : ''})` : ''
-    }\n\nLink to Tweet: ${tweetLink}\n\n- Firebase Function.`;
+    }\n\nLink para a Fofoca: ${tweetLink}\n\n- Firebase Function.`;
 
     await client.sendMail({
       from: EMAIL_API.value(),

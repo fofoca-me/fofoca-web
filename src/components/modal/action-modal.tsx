@@ -1,8 +1,8 @@
-import { useRef, useEffect } from 'react';
-import cn from 'clsx';
-import { Dialog } from '@headlessui/react';
 import { Button } from '@components/ui/button';
-import { CustomIcon } from '@components/ui/custom-icon';
+import { Dialog } from '@headlessui/react';
+import cn from 'clsx';
+import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 
 type ActionModalProps = {
   title: string;
@@ -42,10 +42,12 @@ export function ActionModal({
     <div className='flex flex-col gap-6'>
       <div className='flex flex-col gap-4'>
         {useIcon && (
-          <i className='mx-auto'>
-            <CustomIcon
-              className='h-10 w-10 text-accent-blue dark:text-twitter-icon'
-              iconName='TwitterIcon'
+          <i className='mb-0 self-center lg:mb-10 lg:self-auto'>
+            <Image
+              alt='Logo da fofoca-me'
+              width={64}
+              height={64}
+              src={'/logo-fofocame.png'}
             />
           </i>
         )}
