@@ -4,7 +4,6 @@ import type { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
 import type { Socket } from 'socket.io-client';
 
 export default function onConnection(
-  io: any,
   socket: Socket,
   user: DecodedIdToken
 ): void {

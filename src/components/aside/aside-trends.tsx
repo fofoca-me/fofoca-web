@@ -38,7 +38,10 @@ export function AsideTrends(): JSX.Element {
           className={cn('inner:px-4 inner')}
           {...variants}
         >
-          <h2 className='text-xl font-extrabold py-3'>Tendências para você</h2>
+          <div className='py-3'>
+            <h2 className='text-xl font-extrabold'>Na boca do povo</h2>
+            <p className='text-sm font-normal text-light-secondary dark:text-dark-secondary'>Tendências</p>
+          </div>
           {data.map(({ text, counter, user: { name } }) => (
             <Link href={''} key={text} className='hover-animation accent-tab hover-card relative px-4 py-3 block'>
               <span

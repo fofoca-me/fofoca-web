@@ -45,32 +45,29 @@ export function MessageTable(): JSX.Element {
               href={`/messages/${conversation.id}`}
               key={conversation.id}
               legacyBehavior
-            >
-              <a
-                className='hover-animation accent-tab hover-card relative 
+              className='hover-animation accent-tab hover-card relative 
                          flex  flex-col gap-0.5 px-4 py-2'
-              >
-                <div className='flex w-full items-center'>
-                  <Image
-                    src={(conversation as ConversationWithUser).user.photoURL}
-                    className='mr-2  h-14 w-14 rounded-full object-cover'
-                    width={56}
-                    height={56}
-                    objectFit='cover'
-                    alt={`Imagem do usuário ${
-                      (conversation as ConversationWithUser).user.name
-                    }`}
-                  />
-                  <div className='flex flex-col items-start'>
-                    <p className='font-bold'>
-                      {(conversation as ConversationWithUser).user.name}
-                    </p>
-                    <p className='text-sm text-light-secondary dark:text-dark-secondary'>
-                      Visualize as mensagens
-                    </p>
-                  </div>
+            >
+              <div className='flex w-full items-center'>
+                <Image
+                  src={(conversation as ConversationWithUser).user.photoURL}
+                  className='mr-2  h-14 w-14 rounded-full object-cover'
+                  width={56}
+                  height={56}
+                  objectFit='cover'
+                  alt={`Imagem do usuário ${
+                    (conversation as ConversationWithUser).user.name
+                  }`}
+                />
+                <div className='flex flex-col items-start'>
+                  <p className='font-bold'>
+                    {(conversation as ConversationWithUser).user.name}
+                  </p>
+                  <p className='text-sm text-light-secondary dark:text-dark-secondary'>
+                    Visualize as mensagens
+                  </p>
                 </div>
-              </a>
+              </div>
             </Link>
           ))}
         </motion.div>
