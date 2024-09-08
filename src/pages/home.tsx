@@ -13,7 +13,7 @@ import { useInfiniteScroll } from '@lib/hooks/useInfiniteScroll';
 import { orderBy, where } from 'firebase/firestore';
 import { AnimatePresence } from 'framer-motion';
 import type { ReactElement, ReactNode } from 'react';
-import { UpdateUsername } from '@components/ui/home';
+import { UpdateUsername } from '@components/ui/home/update-username';
 
 export default function Home(): JSX.Element {
   const { isMobile } = useWindow();
