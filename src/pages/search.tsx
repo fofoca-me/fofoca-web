@@ -1,8 +1,9 @@
-import { query, orderBy, startAt, endAt } from 'firebase/firestore';
+import { query, orderBy, startAt, endAt, where } from 'firebase/firestore';
 import { useEffect, useState, type ReactElement, type ReactNode } from 'react';
 import { useCollection } from '@lib/hooks/useCollection';
 import { usersCollection } from '@lib/firebase/collections';
 import { useDebounce } from '@lib/hooks/useDebounce';
+import { useAuth } from '@lib/context/auth-context';
 import { MainContainer } from '@components/home/main-container';
 import {
   ExploreLayout,
@@ -16,6 +17,8 @@ import { UpdateUsername } from '@components/home/update-username';
 import type { User } from '@lib/types/user';
 
 export default function Pesquisar(): JSX.Element {
+  const { user } = useAuth();
+
   const [input, setInput] = useState('');
   const [dataUsers, setDataUsers] = useState<User[]>([]);
 
@@ -24,6 +27,7 @@ export default function Pesquisar(): JSX.Element {
   const { data: usersData, loading } = useCollection(
     query(
       usersCollection,
+      where('username', '!=', user?.username),
       orderBy('username'),
       startAt(debouncedInput),
       endAt(debouncedInput + '\uf8ff')
@@ -33,8 +37,6 @@ export default function Pesquisar(): JSX.Element {
 
   useEffect(() => {
     if (usersData) setDataUsers(usersData);
-
-    console.log(usersData);
   }, [usersData]);
 
   return (
