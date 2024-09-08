@@ -1,15 +1,9 @@
-import {
-  limit,
-  query,
-  where,
-  orderBy,
-  startAt,
-  endAt
-} from 'firebase/firestore';
+import { query, where, orderBy, startAt, endAt } from 'firebase/firestore';
 import { useEffect, useState, type ReactElement, type ReactNode } from 'react';
 import { useCollection } from '@lib/hooks/useCollection';
 import { usersCollection } from '@lib/firebase/collections';
 import { useDebounce } from '@lib/hooks/useDebounce';
+import { useAuth } from '@lib/context/auth-context';
 import { MainContainer } from '@components/home/main-container';
 import {
   ExploreLayout,
@@ -26,11 +20,13 @@ export default function Pesquisar(): JSX.Element {
   const [input, setInput] = useState('');
   const [dataUsers, setDataUsers] = useState<User[]>([]);
 
+  const { user } = useAuth();
   const debouncedInput = useDebounce(input, 500);
 
   const { data: usersData, loading } = useCollection(
     query(
       usersCollection,
+      where('username', '!=', user?.username),
       orderBy('username'),
       startAt(debouncedInput),
       endAt(debouncedInput + '\uf8ff')
