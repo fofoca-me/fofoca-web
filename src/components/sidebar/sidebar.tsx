@@ -9,7 +9,7 @@ import {
   CiSearch
 } from 'react-icons/ci';
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
+import LogoCat from '@components/common/logo-cat';
 import { query, where } from 'firebase/firestore';
 import { useAuth } from '@lib/context/auth-context';
 import { useWindow } from '@lib/context/window-context';
@@ -163,12 +163,14 @@ export function Sidebar(): JSX.Element {
                            focus-visible:bg-accent-blue/10 focus-visible:!ring-accent-blue/80
                            '
               >
-                <Image
+                {/* <Image
                   alt='Logo da fofoca-me'
                   width={64}
                   height={64}
                   src={'/logo-fofocame.png'}
-                />
+                /> */}
+
+                <LogoCat width={64} height={64} />
               </span>
             </Link>
           </h1>
