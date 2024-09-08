@@ -75,6 +75,10 @@
     }
   }
 
+  .card-base {
+    @apply rounded-md border border-gray-200  bg-white shadow-md dark:border-main-background dark:bg-zinc-900
+  }
+
   .hover-animation {
     @apply transition-colors duration-200;
   }

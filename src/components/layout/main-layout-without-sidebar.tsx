@@ -21,13 +21,13 @@ const IndexedLayout = () => {
   const { isMobile } = useWindow();
 
   if(!isMobile) {
-    return <Sidebar />
+    return <Sidebar />;
   }
 
   return (
     <></>
-  )
-}
+  );
+};
 
 export function MainLayoutWithoutSidebar({ children }: LayoutProps): JSX.Element {
 

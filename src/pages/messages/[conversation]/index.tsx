@@ -118,7 +118,7 @@ export default function MessagePage(): JSX.Element {
             rounded-md bg-white dark:border-main-background
             dark:bg-zinc-900 flex h-full w-full flex-col justify-end'>
             <div className='h-full overflow-auto with-scroll flex flex-col-reverse'>
-              <div className='mb-2 flex w-full flex-col justify-end gap-2 pb-2'>
+              <div className='mb-2 flex w-full flex-col justify-end gap-2 pb-2 px-2'>
                 {data
                   ?.sort((a, b) => (a.createdAt as any) - (b.createdAt as any))
                   .map((message) => (
@@ -137,15 +137,16 @@ export default function MessagePage(): JSX.Element {
                             : 'border-l-transparent border-r-main-accent rounded-l-lg'
                           }
                         `}>
+
                         {message.userId !== user?.id && (
-                          <div className='border-4 border-t-transparent border-l-transparent border-r-white border-b-white dark:border-r-zinc-900 dark:border-b-zinc-900 absolute bottom-[2px] left-[5px]'></div>
+                          <div className='border-[3px] border-t-transparent border-l-transparent border-r-white border-b-white dark:border-r-zinc-900 dark:border-b-zinc-900 absolute bottom-[1px] left-[3px]'></div>
                         )}
                       </div>
                       <div
-                        className={`rounded-md max-w-[80%] px-2 py-1 border-2 border-main-accent ${
+                        className={`rounded-md max-w-[80%] px-2 py-1 border border-main-accent ${
                           message.userId === user?.id
                             ? 'bg-main-accent text-white rounded-br-none '
-                            : 'bg-main-secondary text-main-accent rounded-bl-none '
+                            : 'text-main-accent  rounded-bl-none '
                         }
                       `}
                       >
@@ -157,7 +158,7 @@ export default function MessagePage(): JSX.Element {
             </div>
 
 
-            <form className='bg-red flex w-full gap-3' onSubmit={handleSendMessage}>
+            <form className='bg-red flex w-full gap-3 p-3' onSubmit={handleSendMessage}>
               <input
                 className='
                   bg-transparent outline-none placeholder:text-light-secondary dark:placeholder:text-dark-secondary

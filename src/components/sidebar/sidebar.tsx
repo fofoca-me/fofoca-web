@@ -63,8 +63,8 @@ export function Sidebar(): JSX.Element {
     {
       href: '/trends',
       linkName: 'Tendências',
+      canBeHidden: true,
       disabled: false,
-      canBeHidden: false,
       count: 0,
       icon: <CiHashtag size={34} />
     },
@@ -72,7 +72,6 @@ export function Sidebar(): JSX.Element {
       href: '/notifications',
       linkName: 'Notificações',
       disabled: false,
-      isNotification: true,
       count: 0,
       icon: <CiBellOn size={34} />
     },
@@ -93,7 +92,6 @@ export function Sidebar(): JSX.Element {
       href: '/search',
       linkName: 'Pesquisar',
       disabled: false,
-      canBeHidden: true,
       icon: <CiSearch size={34} />
     }
   ]);
@@ -170,9 +168,13 @@ export function Sidebar(): JSX.Element {
             </Link>
           </h1>
           <nav className='flex items-center justify-around xs:flex-col xs:justify-center xl:block'>
-            {navLinksWithCount.map(({ ...linkData }) => (
-              <SidebarLink {...linkData} key={linkData.href} />
-            ))}
+            {navLinksWithCount.map(({ ...linkData }) => {
+              if(!linkData.canBeHidden) {
+                return (
+                  <SidebarLink {...linkData} key={linkData.href} />
+                );
+              }
+            })}
             <SidebarLink
               href={`/user/${username}`}
               username={username}

@@ -13,8 +13,24 @@ import { MainLayout } from '@components/layout/main-layout';
 import { UserCard } from '@components/user/user-card';
 import { UserSearchBar } from '@components/user/user-search';
 import { MainHeader } from '@components/home/main-header';
-import { UpdateUsername } from '@components/home/update-username';
 import type { User } from '@lib/types/user';
+
+const UsersList:React.FC<{users: User[]}> = ({users}) =>{
+
+  if(users.length === 0){
+    return (
+      <p className='text-center'>Nenhum usuário encontrado</p>
+    );
+  }
+
+  return (
+    <div>
+      {users?.map((user) => (
+        <UserCard key={user?.id} {...user} />
+      ))}
+    </div>
+  );
+};
 
 export default function SearchPage(): JSX.Element {
   const [input, setInput] = useState('');
@@ -35,7 +51,11 @@ export default function SearchPage(): JSX.Element {
   );
 
   useEffect(() => {
-    if (usersData) setDataUsers(usersData);
+    if (usersData) {
+      setDataUsers(usersData);
+      return;
+    }
+    setDataUsers([]);
   }, [usersData]);
 
   return (
@@ -45,25 +65,18 @@ export default function SearchPage(): JSX.Element {
         title='Pesquisar'
         className='flex items-center justify-between'
       >
-        <UpdateUsername />
       </MainHeader>
 
-      <div className='container mx-auto p-4'>
+      <div className='container mx-auto py-4'>
         <UserSearchBar
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <section className='mt-6'>
+        <section className='mt-4 py-2 card-base'>
           {loading ? (
-            <p>Carregando usuários...</p>
-          ) : usersData?.length === 0 ? (
-            <p className='text-center'>Nenhum usuário encontrado</p>
+            <p className='p-5 text-center'>Carregando usuários...</p>
           ) : (
-            <div>
-              {dataUsers?.map((user) => (
-                <UserCard key={user?.id} {...user} />
-              ))}
-            </div>
+            <UsersList users={dataUsers} />
           )}
         </section>
       </div>
