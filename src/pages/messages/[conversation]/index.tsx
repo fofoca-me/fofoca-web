@@ -112,47 +112,50 @@ export default function MessagePage(): JSX.Element {
       {loading ? (
         <Loading />
       ) : (
-        <div className='py-4 w-full h-full'>
+        <div className='py-4 w-full h-[calc(100vh-52px)] '>
           <div className='
             items-center relative gap-0.5
             rounded-md bg-white dark:border-main-background
             dark:bg-zinc-900 flex h-full w-full flex-col justify-end p-4'>
-            <div className='mb-2 flex h-full w-full flex-col justify-end gap-2 overflow-auto pb-2'>
-              {data
-                ?.sort((a, b) => (a.createdAt as any) - (b.createdAt as any))
-                .map((message) => (
-                  <motion.div
-                    className={`flex w-full justify-start items-end relative ${
-                      message.userId === user?.id
-                        ? 'flex-row-reverse'
-                        : ' flex-row'
-                    }`}
-                    key={message.id}
-                    {...variants}
-                  >
-                    <div className={`border-8 border-t-transparent border-b-main-accent 
-                        ${message.userId === user?.id
-                          ? 'border-r-transparent border-l-main-accent rounded-r-lg'
-                          : 'border-l-transparent border-r-main-accent rounded-l-lg'
-                        }
-                      `}>
-                      {message.userId !== user?.id && (
-                        <div className='border-[10px] border-t-transparent border-l-transparent border-r-white border-b-white absolute bottom-[2px] left-[5px]'></div>
-                      )}
-                    </div>
-                    <div
-                      className={`rounded-md max-w-[80%] px-2 py-1 border-2 border-main-accent ${
+            <div className='h-full overflow-auto with-scroll flex flex-col-reverse'>
+              <div className='mb-2 flex w-full flex-col justify-end gap-2 pb-2'>
+                {data
+                  ?.sort((a, b) => (a.createdAt as any) - (b.createdAt as any))
+                  .map((message) => (
+                    <motion.div
+                      className={`flex w-full justify-start items-end relative ${
                         message.userId === user?.id
-                          ? 'bg-main-accent text-white rounded-br-none '
-                          : 'bg-main-secondary text-main-accent rounded-bl-none '
-                      }
-                    `}
+                          ? 'flex-row-reverse'
+                          : ' flex-row'
+                      }`}
+                      key={message.id}
+                      {...variants}
                     >
-                      <span>{message.text}</span>
-                    </div>
-                  </motion.div>
-                ))}
+                      <div className={`border-4 border-t-transparent border-b-main-accent 
+                          ${message.userId === user?.id
+                            ? 'border-r-transparent border-l-main-accent rounded-r-lg'
+                            : 'border-l-transparent border-r-main-accent rounded-l-lg'
+                          }
+                        `}>
+                        {message.userId !== user?.id && (
+                          <div className='border-4 border-t-transparent border-l-transparent border-r-white border-b-white dark:border-r-zinc-900 dark:border-b-zinc-900 absolute bottom-[2px] left-[5px]'></div>
+                        )}
+                      </div>
+                      <div
+                        className={`rounded-md max-w-[80%] px-2 py-1 border-2 border-main-accent ${
+                          message.userId === user?.id
+                            ? 'bg-main-accent text-white rounded-br-none '
+                            : 'bg-main-secondary text-main-accent rounded-bl-none '
+                        }
+                      `}
+                      >
+                        <span>{message.text}</span>
+                      </div>
+                    </motion.div>
+                  ))}
+              </div>
             </div>
+
 
             <form className='bg-red flex w-full gap-3' onSubmit={handleSendMessage}>
               <input

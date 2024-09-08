@@ -41,6 +41,31 @@
   body {
     @apply hover-animation bg-gray-100 dark:bg-main-background font-twitter-chirp text-light-primary dark:text-dark-primary;
   }
+
+  .with-scroll::-webkit-scrollbar-track {
+    @apply rounded-none bg-red-500 border-2;
+  }
+
+  .with-scroll::-webkit-scrollbar-track:hover {
+    @apply bg-red-500;
+  }
+  
+  .with-scroll::-webkit-scrollbar-track:active {
+    @apply bg-red-500;
+  }
+
+  .with-scroll::-webkit-scrollbar-thumb {
+    @apply rounded-sm bg-gray-600;
+  }
+
+  .with-scroll::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-600;
+  }
+
+  .with-scroll::-webkit-scrollbar-thumb:active {
+    @apply bg-gray-600;
+  }
+
 }
 
 @layer components {

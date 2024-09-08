@@ -163,13 +163,6 @@ export function Sidebar(): JSX.Element {
                            focus-visible:bg-accent-blue/10 focus-visible:!ring-accent-blue/80
                            '
               >
-                {/* <Image
-                  alt='Logo da fofoca-me'
-                  width={64}
-                  height={64}
-                  src={'/logo-fofocame.png'}
-                /> */}
-
                 <LogoCat width={64} height={64} />
               </span>
             </Link>
