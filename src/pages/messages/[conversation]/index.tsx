@@ -117,8 +117,8 @@ export default function MessagePage(): JSX.Element {
             items-center relative gap-0.5
             rounded-md bg-white dark:border-main-background
             dark:bg-zinc-900 flex h-full w-full flex-col justify-end'>
-            <div className='h-full overflow-auto with-scroll flex flex-col-reverse'>
-              <div className='mb-2 flex w-full flex-col justify-end gap-2 pb-2 px-2'>
+            <div className='h-full overflow-auto with-scroll flex w-full flex-col-reverse'>
+              <div className='mb-2 flex w-full h-full flex-col justify-end gap-2 pb-2 px-2'>
                 {data
                   ?.sort((a, b) => (a.createdAt as any) - (b.createdAt as any))
                   .map((message) => (
