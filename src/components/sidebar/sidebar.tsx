@@ -10,8 +10,7 @@ import {
 } from 'react-icons/ci';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { query, where,  } from 'firebase/firestore';
-import { usePathname } from 'next/navigation';
+import { query, where } from 'firebase/firestore';
 import { useAuth } from '@lib/context/auth-context';
 import { useWindow } from '@lib/context/window-context';
 import { useModal } from '@lib/hooks/useModal';
@@ -47,7 +46,6 @@ export type NewNavLinks = Omit<NavLink, 'iconName'>;
 export function Sidebar(): JSX.Element {
   const { user } = useAuth();
   const { isMobile } = useWindow();
-  const path = usePathname();
 
   const { open, openModal, closeModal } = useModal();
 
@@ -109,7 +107,7 @@ export function Sidebar(): JSX.Element {
   const { data: conversations } = useCollection(
     query(
       conversationsCollection,
-      where('targetUserId', '==', user?.id),
+      where('targetUserId', '==', user?.id)
     )
   );
 

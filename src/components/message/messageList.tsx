@@ -34,8 +34,6 @@ export function MessageTable(): JSX.Element {
 
   const data = [...(senders ?? []), ...(emitters ?? [])];
 
-  console.log({data, senders, emitters})
-
   return (
     <section>
       {sLoading || eLoading ? (

@@ -34,7 +34,7 @@ import type {
 import type { WithFieldValue } from 'firebase/firestore';
 import { Loading } from '@components/ui/loading';
 import type { MotionProps } from 'framer-motion';
-import { BiNavigation } from "react-icons/bi";
+import { BiNavigation } from 'react-icons/bi';
 
 export const variants: MotionProps = {
   initial: { opacity: 0 },
