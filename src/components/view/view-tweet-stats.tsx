@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import cn from 'clsx';
-import { useArrayDocument } from '@lib/hooks/useArrayDocument';
-import { useModal } from '@lib/hooks/useModal';
-import { usersCollection } from '@lib/firebase/collections';
 import { Modal } from '@components/modal/modal';
 import { TweetStatsModal } from '@components/modal/tweet-stats-modal';
 import { NumberStats } from '@components/tweet/number-stats';
 import { UserCards } from '@components/user/user-cards';
+import { usersCollection } from '@lib/firebase/collections';
+import { useArrayDocument } from '@lib/hooks/useArrayDocument';
+import { useModal } from '@lib/hooks/useModal';
 import type { Tweet } from '@lib/types/tweet';
+import cn from 'clsx';
+import { useState } from 'react';
 
 type viewTweetStats = Pick<Tweet, 'userRetweets' | 'userLikes'> & {
   likeMove: number;
@@ -55,9 +55,9 @@ export function ViewTweetStats({
   };
 
   const allStats: Readonly<Stats[]> = [
-    ['Reply', null, replyMove, currentReplies],
-    ['Retweet', 'retweets', tweetMove, currentTweets],
-    ['Like', 'likes', likeMove, currentLikes]
+    ['Resposta', null, replyMove, currentReplies],
+    ['Refofocada', 'retweets', tweetMove, currentTweets],
+    ['Gostei', 'likes', likeMove, currentLikes]
   ];
 
   return (
@@ -102,7 +102,7 @@ export function ViewTweetStats({
                     stats === 1
                       ? title
                       : stats > 1 && index === 0
-                      ? `${title.slice(0, -1)}ies`
+                      ? `${title.slice(0, -1)}as`
                       : `${title}s`
                   }`}</p>
                 </button>
