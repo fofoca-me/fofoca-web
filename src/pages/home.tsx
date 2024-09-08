@@ -32,7 +32,7 @@ export default function Home(): JSX.Element {
         title='Só fuxico'
         className='flex items-center justify-between'
       >
-        {/* <UpdateUsername /> */}
+        <UpdateUsername />
       </MainHeader>
       {!isMobile && <Input />}
       <section className='mt-0.5 py-4 xs:mt-0'>
