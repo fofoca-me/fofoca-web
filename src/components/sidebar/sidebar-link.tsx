@@ -29,7 +29,7 @@ export function SidebarLink({
     <Link href={href}>
       <span
         className={cn(
-          'group py-1 outline-none',
+          'group py-1 outline-none block',
           canBeHidden ? 'hidden xs:flex' : 'flex',
           disabled && 'cursor-not-allowed'
         )}
@@ -37,10 +37,10 @@ export function SidebarLink({
       >
         <div
           className={cn(
-            `custom-button flex items-center justify-center gap-4 self-start p-2 text-xl transition 
+            `custom-button flex items-center justify-start gap-4 self-start p-2 text-xl transition 
              duration-200 group-hover:bg-light-primary/10 group-focus-visible:ring-2 
              group-focus-visible:ring-[#878a8c] dark:group-hover:bg-dark-primary/10 
-             dark:group-focus-visible:ring-white xs:p-3 xl:pr-5`,
+             dark:group-focus-visible:ring-white xs:p-3 xl:pr-5 w-full`,
             isActive && 'font-bold'
           )}
         >
@@ -54,9 +54,9 @@ export function SidebarLink({
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
-                className='hidden h-4 w-4 items-center justify-center rounded-full bg-white xl:flex'
+                className='hidden h-4 w-4 items-center justify-center rounded-full bg-main-accent xl:flex'
               >
-               <p className='text-xs text-black'>{count}</p>
+               <p className='text-xs text-white'>{count}</p>
              </motion.div>
             )}
           </AnimatePresence>
