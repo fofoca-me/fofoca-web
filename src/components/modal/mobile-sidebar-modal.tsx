@@ -1,4 +1,7 @@
+/* eslint-disable linebreak-style */
 import Link from 'next/link';
+import { CiSearch } from 'react-icons/ci';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { Button } from '@components/ui/button';
@@ -29,9 +32,11 @@ const topNavLinks: Readonly<MobileNavLink[]> = [
     iconName: 'BookmarkIcon'
   },
   {
-    href: '/people',
-    linkName: 'Fofoqueiros',
-    iconName: 'UserGroupIcon'
+    href: '/search',
+    linkName: 'Pesquisar',
+    iconName: 'MagnifyingGlassIcon',
+    disabled: false,
+    icon: <CiSearch size={34} />
   }
 ];
 

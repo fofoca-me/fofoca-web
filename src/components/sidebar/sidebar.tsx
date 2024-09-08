@@ -5,12 +5,18 @@ import {
   CiMail,
   CiBellOn,
   CiBookmark,
-  CiUser
+  CiUser,
+  CiSearch
 } from 'react-icons/ci';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { query, where } from 'firebase/firestore';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '@lib/context/auth-context';
 import { useWindow } from '@lib/context/window-context';
 import { useModal } from '@lib/hooks/useModal';
+import { useCollection } from '@lib/hooks/useCollection';
+import { notificationsCollection } from '@lib/firebase/collections';
 import { Modal } from '@components/modal/modal';
 import { Input } from '@components/input/input';
 import { CustomIcon } from '@components/ui/custom-icon';
@@ -19,16 +25,11 @@ import { SidebarLink } from './sidebar-link';
 import { MoreSettings } from './more-settings';
 import { SidebarProfile } from './sidebar-profile';
 import type { ReactNode } from 'react';
-import Image from 'next/image';
-import { useCollection } from '@lib/hooks/useCollection';
-import { notificationsCollection } from '@lib/firebase/collections';
-import { query, where } from 'firebase/firestore';
 
-import * as SolidIcons from '@heroicons/react/24/solid';
-import * as OutlineIcons from '@heroicons/react/24/outline';
+import type * as SolidIcons from '@heroicons/react/24/solid';
+import type * as OutlineIcons from '@heroicons/react/24/outline';
 
 export type IconName = keyof typeof SolidIcons | keyof typeof OutlineIcons;
-import { usePathname } from 'next/navigation';
 
 export type NavLink = {
   href: string;
@@ -41,46 +42,7 @@ export type NavLink = {
   count?: number;
 };
 
-// const navLinks: Readonly<NavLink[]> = [
-//   {
-//     href: '/home',
-//     linkName: 'Home',
-//     iconName: 'HomeIcon',
-//     icon: <CiHome size={34} />
-//   },
-//   {
-//     href: '/explore',
-//     linkName: 'Explorar',
-//     iconName: 'HashtagIcon',
-//     disabled: true,
-//     canBeHidden: true,
-//     icon: <CiHashtag size={34} />
-//   },
-//   {
-//     href: '/notifications',
-//     linkName: 'Notificações',
-//     iconName: 'BellIcon',
-//     disabled: false,
-//     isNotification: true,
-//     icon: <CiBellOn size={34} />
-//   },
-//   {
-//     href: '/messages',
-//     linkName: 'Mensagens',
-//     iconName: 'EnvelopeIcon',
-//     disabled: false,
-//     icon: <CiMail size={34} />
-//   },
-//   {
-//     href: '/bookmarks',
-//     linkName: 'Babados',
-//     iconName: 'BookmarkIcon',
-//     canBeHidden: true,
-//     icon: <CiBookmark size={34} />
-//   }
-// ];
-
-export type NewNavLinks = Omit<NavLink, 'iconName'>
+export type NewNavLinks = Omit<NavLink, 'iconName'>;
 
 export function Sidebar(): JSX.Element {
   const { user } = useAuth();
@@ -126,6 +88,13 @@ export function Sidebar(): JSX.Element {
       canBeHidden: true,
       count: 0,
       icon: <CiBookmark size={34} />
+    },
+    {
+      href: '/search',
+      linkName: 'Pesquisar',
+      disabled: false,
+      canBeHidden: true,
+      icon: <CiSearch size={34} />
     }
   ]);
 
@@ -138,14 +107,15 @@ export function Sidebar(): JSX.Element {
   );
 
   useEffect(() => {
-    if(notifications) {
-      setNavLinksWithCount((prevItems) => (
-        prevItems.map((link: NewNavLinks) => 
-          link.linkName === 'Notificações' ? { ...link, count: notifications.length } : link
+    if (notifications)
+      setNavLinksWithCount((prevItems) =>
+        prevItems.map((link: NewNavLinks) =>
+          link.linkName === 'Notificações'
+            ? { ...link, count: notifications.length }
+            : link
         )
-      ));
-    }
-  }, [notifications])
+      );
+  }, [notifications]);
 
   return (
     <header
@@ -184,9 +154,9 @@ export function Sidebar(): JSX.Element {
             </Link>
           </h1>
           <nav className='flex items-center justify-around xs:flex-col xs:justify-center xl:block'>
-            {navLinksWithCount.map(({ ...linkData }) =>
+            {navLinksWithCount.map(({ ...linkData }) => (
               <SidebarLink {...linkData} key={linkData.href} />
-            )}
+            ))}
             <SidebarLink
               href={`/user/${username}`}
               username={username}
