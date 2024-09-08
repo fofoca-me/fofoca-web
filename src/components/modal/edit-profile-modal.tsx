@@ -1,12 +1,12 @@
-import { useRef } from 'react';
-import cn from 'clsx';
 import { MainHeader } from '@components/home/main-header';
 import { Button } from '@components/ui/button';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { NextImage } from '@components/ui/next-image';
 import { ToolTip } from '@components/ui/tooltip';
-import type { ReactNode, ChangeEvent } from 'react';
 import type { User } from '@lib/types/user';
+import cn from 'clsx';
+import type { ChangeEvent, ReactNode } from 'react';
+import { useRef } from 'react';
 
 type EditProfileModalProps = Pick<
   User,
@@ -171,19 +171,6 @@ export function EditProfileModal({
             </div>
           </div>
           {children}
-          <Button
-            className='accent-tab -mx-4 mb-4 flex cursor-not-allowed items-center justify-between rounded-none
-                       py-2 hover:bg-light-primary/10 active:bg-light-primary/20 disabled:brightness-100
-                       dark:hover:bg-dark-primary/10 dark:active:bg-dark-primary/20'
-          >
-            <span className='mx-2 text-xl'>Mude para profissional</span>
-            <i>
-              <HeroIcon
-                className='h-6 w-6 text-light-secondary dark:text-dark-secondary'
-                iconName='ChevronRightIcon'
-              />
-            </i>
-          </Button>
         </div>
       </section>
     </>
