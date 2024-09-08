@@ -19,10 +19,10 @@ import { useCollection } from '@lib/hooks/useCollection';
 import { useAuth } from '@lib/context/auth-context';
 import { Message } from '@lib/types/message';
 import {
-  TrendsLayout,
+  MessageLayout,
   ProtectedLayout
 } from '@components/layout/common-layout';
-import { MainLayout } from '@components/layout/main-layout';
+import { MainLayoutWithoutSidebar } from '@components/layout/main-layout-without-sidebar';
 import { SEO } from '@components/common/seo';
 import { MainHeader } from '@components/home/main-header';
 import { Button } from '@components/ui/button';
@@ -112,11 +112,11 @@ export default function MessagePage(): JSX.Element {
       {loading ? (
         <Loading />
       ) : (
-        <div className='py-4 w-full h-[calc(100vh-52px)] '>
+        <div className='w-full h-[calc(100vh-52px)] '>
           <div className='
             items-center relative gap-0.5
             rounded-md bg-white dark:border-main-background
-            dark:bg-zinc-900 flex h-full w-full flex-col justify-end p-4'>
+            dark:bg-zinc-900 flex h-full w-full flex-col justify-end'>
             <div className='h-full overflow-auto with-scroll flex flex-col-reverse'>
               <div className='mb-2 flex w-full flex-col justify-end gap-2 pb-2'>
                 {data
@@ -187,8 +187,8 @@ export default function MessagePage(): JSX.Element {
 
 MessagePage.getLayout = (page: ReactElement): ReactNode => (
   <ProtectedLayout>
-    <MainLayout>
-      <TrendsLayout>{page}</TrendsLayout>
-    </MainLayout>
+    <MainLayoutWithoutSidebar>
+      <MessageLayout>{page}</MessageLayout>
+    </MainLayoutWithoutSidebar>
   </ProtectedLayout>
 );
