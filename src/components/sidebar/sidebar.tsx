@@ -10,13 +10,13 @@ import {
 } from 'react-icons/ci';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { query, where } from 'firebase/firestore';
+import { query, where,  } from 'firebase/firestore';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@lib/context/auth-context';
 import { useWindow } from '@lib/context/window-context';
 import { useModal } from '@lib/hooks/useModal';
 import { useCollection } from '@lib/hooks/useCollection';
-import { notificationsCollection } from '@lib/firebase/collections';
+import { notificationsCollection, conversationsCollection } from '@lib/firebase/collections';
 import { Modal } from '@components/modal/modal';
 import { Input } from '@components/input/input';
 import { CustomIcon } from '@components/ui/custom-icon';
@@ -106,8 +106,15 @@ export function Sidebar(): JSX.Element {
     )
   );
 
+  const { data: conversations } = useCollection(
+    query(
+      conversationsCollection,
+      where('targetUserId', '==', user?.id),
+    )
+  );
+
   useEffect(() => {
-    if (notifications)
+    if (notifications) {
       setNavLinksWithCount((prevItems) =>
         prevItems.map((link: NewNavLinks) =>
           link.linkName === 'Notificações'
@@ -115,7 +122,21 @@ export function Sidebar(): JSX.Element {
             : link
         )
       );
+    }
   }, [notifications]);
+
+  useEffect(() => {
+    if (conversations) {
+
+      setNavLinksWithCount((prevItems) =>
+        prevItems.map((link: NewNavLinks) =>
+          link.linkName === 'Mensagens'
+            ? { ...link, count: conversations.length }
+            : link
+        )
+      );
+    }
+  }, [conversations]);
 
   return (
     <header
@@ -165,20 +186,18 @@ export function Sidebar(): JSX.Element {
             />
             {!isMobile && <MoreSettings />}
           </nav>
-          {!path.includes('messages/') && (
-            <Button
-              className='accent-tab absolute right-4 -translate-y-[72px] bg-main-accent text-lg font-bold text-white
-                       outline-none transition hover:brightness-90 active:brightness-75 xs:static xs:translate-y-0
-                       xs:hover:bg-main-accent/90 xs:active:bg-main-accent/75 xl:w-11/12'
-              onClick={openModal}
-            >
-              <CustomIcon
-                className='block h-6 w-6 xl:hidden'
-                iconName='FeatherIcon'
-              />
-              <p className='hidden xl:block'>Fofocar</p>
-            </Button>
-          )}
+          <Button
+            className='accent-tab absolute right-4 -translate-y-[72px] bg-main-accent text-lg font-bold text-white
+                      outline-none transition hover:brightness-90 active:brightness-75 xs:static xs:translate-y-0
+                      xs:hover:bg-main-accent/90 xs:active:bg-main-accent/75 xl:w-11/12'
+            onClick={openModal}
+          >
+            <CustomIcon
+              className='block h-6 w-6 xl:hidden'
+              iconName='FeatherIcon'
+            />
+            <p className='hidden xl:block'>Fofocar</p>
+          </Button>
         </section>
         {!isMobile && <SidebarProfile />}
       </div>

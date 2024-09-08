@@ -34,21 +34,21 @@ export function MessageTable(): JSX.Element {
 
   const data = [...(senders ?? []), ...(emitters ?? [])];
 
+  console.log({data, senders, emitters})
+
   return (
     <section>
       {sLoading || eLoading ? (
         <Loading />
       ) : data ? (
-        <motion.div className={cn('inner:px-4 inner:py-3')} {...variants}>
+        <motion.div className={cn('space-y-2 py-4')} {...variants}>
           {data.map((conversation) => (
             <Link
               href={`/messages/${conversation.id}`}
               key={conversation.id}
               legacyBehavior
-              className='hover-animation accent-tab hover-card relative 
-                         flex  flex-col gap-0.5 px-4 py-2'
             >
-              <div className='flex w-full items-center'>
+              <div className='cursor-pointer flex w-full items-center hover-animation accent-tab relative gap-0.5 rounded-md border bg-white p-4 duration-200 hover:shadow-md dark:border-main-background dark:bg-zinc-900'>
                 <Image
                   src={(conversation as ConversationWithUser).user.photoURL}
                   className='mr-2  h-14 w-14 rounded-full object-cover'
