@@ -5,7 +5,6 @@ import { Modal } from '@components/modal/modal';
 import { UsernameModal } from '@components/modal/username-modal';
 import { Button } from '@components/ui/button';
 import { HeroIcon } from '@components/ui/hero-icon';
-import { ToolTip } from '@components/ui/tooltip';
 import { useAuth } from '@lib/context/auth-context';
 import { checkUsernameAvailability, updateUsername } from '@lib/firebase/utils';
 import { useModal } from '@lib/hooks/useModal';
@@ -128,7 +127,7 @@ export function UpdateUsername(): JSX.Element {
         onClick={openModal}
       >
         <HeroIcon className='h-5 w-5' iconName='SparklesIcon' />
-        <ToolTip tip='Top fofocas' />
+        {/* <ToolTip tip='Top fofocas' /> */}
       </Button>
     </>
   );

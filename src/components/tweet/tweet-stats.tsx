@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { HeroIcon } from '@components/ui/hero-icon';
+import { ToolTip } from '@components/ui/tooltip';
 import { ViewTweetStats } from '@components/view/view-tweet-stats';
 import { useAuth } from '@lib/context/auth-context';
 import { manageBookmark, manageLike, manageRetweet } from '@lib/firebase/utils';
@@ -192,6 +193,7 @@ export function TweetStats({
                   className='h-5 w-auto'
                 />
               </i>
+              <ToolTip tip='Babadx' className='bottom-0' />
             </button>
           </div>
           <TweetShare userId={userId} tweetId={tweetId} viewTweet={viewTweet} />
