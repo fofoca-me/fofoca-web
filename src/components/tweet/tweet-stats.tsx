@@ -1,12 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { useState, useEffect, useMemo } from 'react';
-import cn from 'clsx';
-import { manageRetweet, manageLike } from '@lib/firebase/utils';
+import { HeroIcon } from '@components/ui/hero-icon';
 import { ViewTweetStats } from '@components/view/view-tweet-stats';
+import { useAuth } from '@lib/context/auth-context';
+import { manageBookmark, manageLike, manageRetweet } from '@lib/firebase/utils';
+import type { Tweet } from '@lib/types/tweet';
+import { preventBubbling } from '@lib/utils';
+import cn from 'clsx';
+import Link from 'next/link';
+import { useEffect, useMemo, useState } from 'react';
+import toast from 'react-hot-toast';
 import { TweetOption } from './tweet-option';
 import { TweetShare } from './tweet-share';
-import type { Tweet } from '@lib/types/tweet';
 
 type TweetStatsProps = Pick<
   Tweet,
@@ -33,6 +38,8 @@ export function TweetStats({
   userReplies: totalReplies,
   openModal
 }: TweetStatsProps): JSX.Element {
+  const { userBookmarks } = useAuth();
+
   const totalLikes = userLikes.length;
   const totalTweets = userRetweets.length;
 
@@ -66,6 +73,30 @@ export function TweetStats({
     [totalTweets]
   );
 
+  const handleBookmark =
+    (closeMenu: () => void, ...args: Parameters<typeof manageBookmark>) =>
+    async (): Promise<void> => {
+      const [type] = args;
+
+      closeMenu();
+      await manageBookmark(...args);
+
+      toast.success(
+        type === 'bookmark'
+          ? (): JSX.Element => (
+              <span className='flex gap-2'>
+                Fofoca adicionada aos seus babados
+                <Link href='/bookmarks'>
+                  <span className='custom-underline font-bold'>Visualizar</span>
+                </Link>
+              </span>
+            )
+          : 'Tweet removido dos seus favoritos'
+      );
+    };
+
+  const tweetIsBookmarked = !!userBookmarks?.some(({ id }) => id === tweetId);
+
   const tweetIsLiked = userLikes.includes(userId);
   const tweetIsRetweeted = userRetweets.includes(userId);
 
@@ -93,9 +124,9 @@ export function TweetStats({
         )}
       >
         <TweetOption
-          className='hover:text-accent-blue focus-visible:text-accent-blue'
-          iconClassName='group-hover:bg-accent-blue/10 group-active:bg-accent-blue/20 
-                         group-focus-visible:bg-accent-blue/10 group-focus-visible:ring-accent-blue/80'
+          className='hover:text-[#EF2182] focus-visible:text-[#EF2182]'
+          iconClassName='group-hover:bg-[#EF2182]/10 group-active:bg-[#EF2182]/20 
+                         group-focus-visible:bg-[#EF2182]/10 group-focus-visible:ring-[#EF2182]/80'
           tip='Responder'
           move={replyMove}
           stats={currentReplies}
@@ -139,17 +170,32 @@ export function TweetStats({
             createdBy: tweetCreatedBy
           } as Tweet)}
         />
-        <TweetShare userId={userId} tweetId={tweetId} viewTweet={viewTweet} />
-        {isOwner && (
-          <TweetOption
-            className='hover:text-accent-blue focus-visible:text-accent-blue'
-            iconClassName='group-hover:bg-accent-blue/10 group-active:bg-accent-blue/20 
-                           group-focus-visible:bg-accent-blue/10 group-focus-visible:ring-accent-blue/80'
-            tip='Analytics'
-            iconName='ChartPieIcon'
-            disabled
-          />
-        )}
+        <div className='z-[1] flex items-center justify-center gap-4'>
+          <div className='relative'>
+            <button
+              className='group relative flex items-center gap-1 p-0 outline-none 
+               transition-none hover:text-[#EF2182] focus-visible:text-[#EF2182]'
+              onClick={preventBubbling(
+                handleBookmark(
+                  close,
+                  !tweetIsBookmarked ? 'bookmark' : 'unbookmark',
+                  userId,
+                  tweetId
+                )
+              )}
+            >
+              <i className='relative rounded-full p-2 not-italic duration-200 group-hover:bg-[#EF2182]/10  group-focus-visible:bg-[#EF2182]/10 group-focus-visible:ring-2  group-focus-visible:ring-[#EF2182]/80 group-active:bg-[#EF2182]/20'>
+                <HeroIcon
+                  iconName={
+                    !tweetIsBookmarked ? 'BookmarkIcon' : 'BookmarkSlashIcon'
+                  }
+                  className='h-5 w-auto'
+                />
+              </i>
+            </button>
+          </div>
+          <TweetShare userId={userId} tweetId={tweetId} viewTweet={viewTweet} />
+        </div>
       </div>
     </>
   );
