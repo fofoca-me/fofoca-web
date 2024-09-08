@@ -1,10 +1,10 @@
-import { useAuth } from '@lib/context/auth-context';
-import { useModal } from '@lib/hooks/useModal';
-import { manageFollow } from '@lib/firebase/utils';
-import { preventBubbling } from '@lib/utils';
-import { Modal } from '@components/modal/modal';
 import { ActionModal } from '@components/modal/action-modal';
+import { Modal } from '@components/modal/modal';
 import { Button } from '@components/ui/button';
+import { useAuth } from '@lib/context/auth-context';
+import { manageFollow } from '@lib/firebase/utils';
+import { useModal } from '@lib/hooks/useModal';
+import { preventBubbling } from '@lib/utils';
 
 type FollowButtonProps = {
   userTargetId: string;
@@ -40,9 +40,9 @@ export function FollowButton({
         closeModal={closeModal}
       >
         <ActionModal
-          title={`Unfollow @${userTargetUsername}?`}
-          description='Their Tweets will no longer show up in your home timeline. You can still view their profile, unless their Tweets are protected.'
-          mainBtnLabel='Unfollow'
+          title={`Deixar de Seguir @${userTargetUsername}?`}
+          description='Os Tweets deles não aparecerão mais na sua timeline inicial. Você ainda pode ver o perfil deles, a menos que os Tweets deles sejam protegidos.'
+          mainBtnLabel='Deixar de Seguir'
           action={handleUnfollow}
           closeModal={closeModal}
         />
@@ -51,7 +51,7 @@ export function FollowButton({
         <Button
           className='dark-bg-tab min-w-[106px] self-start border border-light-line-reply px-4 py-1.5 
                      font-bold hover:border-accent-red hover:bg-accent-red/10 hover:text-accent-red
-                     hover:before:content-["Unfollow"] inner:hover:hidden dark:border-light-secondary'
+                     hover:before:content-["Deixar_de_Seguir"] inner:hover:hidden dark:border-light-secondary'
           onClick={preventBubbling(openModal)}
         >
           <span>Seguindo</span>
