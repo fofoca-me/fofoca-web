@@ -17,7 +17,6 @@ export function ProtectedLayout({ children }: LayoutProps): JSX.Element {
   return <>{children}</>;
 }
 
-
 export function HomeLayout({ children }: LayoutProps): JSX.Element {
   return (
     <>
@@ -53,7 +52,7 @@ export function TrendsLayout({ children }: LayoutProps): JSX.Element {
   );
 }
 
-export function PeopleLayout({ children }: LayoutProps): JSX.Element {
+export function ExploreLayout({ children }: LayoutProps): JSX.Element {
   return (
     <>
       {children}

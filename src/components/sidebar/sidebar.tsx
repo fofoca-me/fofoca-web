@@ -5,12 +5,18 @@ import {
   CiMail,
   CiBellOn,
   CiBookmark,
-  CiUser
+  CiUser,
+  CiSearch
 } from 'react-icons/ci';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { query, where } from 'firebase/firestore';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '@lib/context/auth-context';
 import { useWindow } from '@lib/context/window-context';
 import { useModal } from '@lib/hooks/useModal';
+import { useCollection } from '@lib/hooks/useCollection';
+import { notificationsCollection } from '@lib/firebase/collections';
 import { Modal } from '@components/modal/modal';
 import { Input } from '@components/input/input';
 import { CustomIcon } from '@components/ui/custom-icon';
@@ -19,16 +25,11 @@ import { SidebarLink } from './sidebar-link';
 import { MoreSettings } from './more-settings';
 import { SidebarProfile } from './sidebar-profile';
 import type { ReactNode } from 'react';
-import Image from 'next/image';
-import { useCollection } from '@lib/hooks/useCollection';
-import { notificationsCollection } from '@lib/firebase/collections';
-import { query, where } from 'firebase/firestore';
 
-import * as SolidIcons from '@heroicons/react/24/solid';
-import * as OutlineIcons from '@heroicons/react/24/outline';
+import type * as SolidIcons from '@heroicons/react/24/solid';
+import type * as OutlineIcons from '@heroicons/react/24/outline';
 
 export type IconName = keyof typeof SolidIcons | keyof typeof OutlineIcons;
-import { usePathname } from 'next/navigation';
 
 export type NavLink = {
   href: string;
@@ -77,6 +78,14 @@ const navLinks: Readonly<NavLink[]> = [
     iconName: 'BookmarkIcon',
     canBeHidden: true,
     icon: <CiBookmark size={34} />
+  },
+  {
+    href: '/search',
+    linkName: 'Pesquisar',
+    iconName: 'Bars3BottomLeftIcon',
+    disabled: false,
+    canBeHidden: true,
+    icon: <CiSearch size={34} />
   }
 ];
 
@@ -127,6 +136,13 @@ export function Sidebar(): JSX.Element {
       canBeHidden: true,
       count: 0,
       icon: <CiBookmark size={34} />
+    },
+    {
+      href: '/search',
+      linkName: 'Pesquisar',
+      disabled: false,
+      canBeHidden: true,
+      icon: <CiSearch size={34} />
     }
   ]);
 
@@ -139,7 +155,7 @@ export function Sidebar(): JSX.Element {
   );
 
   useEffect(() => {
-    if (notifications) {
+    if (notifications)
       setNavLinksWithCount((prevItems) =>
         prevItems.map((link: NewNavLinks) =>
           link.linkName === 'Notificações'
@@ -147,7 +163,6 @@ export function Sidebar(): JSX.Element {
             : link
         )
       );
-    }
   }, [notifications]);
 
   return (
