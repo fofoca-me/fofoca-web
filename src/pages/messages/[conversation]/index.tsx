@@ -19,10 +19,10 @@ import { useCollection } from '@lib/hooks/useCollection';
 import { useAuth } from '@lib/context/auth-context';
 import { Message } from '@lib/types/message';
 import {
-  TrendsLayout,
+  MessageLayout,
   ProtectedLayout
 } from '@components/layout/common-layout';
-import { MainLayout } from '@components/layout/main-layout';
+import { MainLayoutWithoutSidebar } from '@components/layout/main-layout-without-sidebar';
 import { SEO } from '@components/common/seo';
 import { MainHeader } from '@components/home/main-header';
 import { Button } from '@components/ui/button';
@@ -112,49 +112,53 @@ export default function MessagePage(): JSX.Element {
       {loading ? (
         <Loading />
       ) : (
-        <div className='py-4 w-full h-full'>
+        <div className='w-full h-[calc(100vh-52px)] '>
           <div className='
             items-center relative gap-0.5
             rounded-md bg-white dark:border-main-background
-            dark:bg-zinc-900 flex h-full w-full flex-col justify-end p-4'>
-            <div className='mb-2 flex h-full w-full flex-col justify-end gap-2 overflow-auto pb-2'>
-              {data
-                ?.sort((a, b) => (a.createdAt as any) - (b.createdAt as any))
-                .map((message) => (
-                  <motion.div
-                    className={`flex w-full justify-start items-end relative ${
-                      message.userId === user?.id
-                        ? 'flex-row-reverse'
-                        : ' flex-row'
-                    }`}
-                    key={message.id}
-                    {...variants}
-                  >
-                    <div className={`border-8 border-t-transparent border-b-main-accent 
-                        ${message.userId === user?.id
-                          ? 'border-r-transparent border-l-main-accent rounded-r-lg'
-                          : 'border-l-transparent border-r-main-accent rounded-l-lg'
-                        }
-                      `}>
-                      {message.userId !== user?.id && (
-                        <div className='border-[10px] border-t-transparent border-l-transparent border-r-white border-b-white absolute bottom-[2px] left-[5px]'></div>
-                      )}
-                    </div>
-                    <div
-                      className={`rounded-md max-w-[80%] px-2 py-1 border-2 border-main-accent ${
+            dark:bg-zinc-900 flex h-full w-full flex-col justify-end'>
+            <div className='h-full overflow-auto with-scroll flex flex-col-reverse'>
+              <div className='mb-2 flex w-full flex-col justify-end gap-2 pb-2 px-2'>
+                {data
+                  ?.sort((a, b) => (a.createdAt as any) - (b.createdAt as any))
+                  .map((message) => (
+                    <motion.div
+                      className={`flex w-full justify-start items-end relative ${
                         message.userId === user?.id
-                          ? 'bg-main-accent text-white rounded-br-none '
-                          : 'bg-main-secondary text-main-accent rounded-bl-none '
-                      }
-                    `}
+                          ? 'flex-row-reverse'
+                          : ' flex-row'
+                      }`}
+                      key={message.id}
+                      {...variants}
                     >
-                      <span>{message.text}</span>
-                    </div>
-                  </motion.div>
-                ))}
+                      <div className={`border-4 border-t-transparent border-b-main-accent 
+                          ${message.userId === user?.id
+                            ? 'border-r-transparent border-l-main-accent rounded-r-lg'
+                            : 'border-l-transparent border-r-main-accent rounded-l-lg'
+                          }
+                        `}>
+
+                        {message.userId !== user?.id && (
+                          <div className='border-[3px] border-t-transparent border-l-transparent border-r-white border-b-white dark:border-r-zinc-900 dark:border-b-zinc-900 absolute bottom-[1px] left-[3px]'></div>
+                        )}
+                      </div>
+                      <div
+                        className={`rounded-md max-w-[80%] px-2 py-1 border border-main-accent ${
+                          message.userId === user?.id
+                            ? 'bg-main-accent text-white rounded-br-none '
+                            : 'text-main-accent  rounded-bl-none '
+                        }
+                      `}
+                      >
+                        <span>{message.text}</span>
+                      </div>
+                    </motion.div>
+                  ))}
+              </div>
             </div>
 
-            <form className='bg-red flex w-full gap-3' onSubmit={handleSendMessage}>
+
+            <form className='bg-red flex w-full gap-3 p-3' onSubmit={handleSendMessage}>
               <input
                 className='
                   bg-transparent outline-none placeholder:text-light-secondary dark:placeholder:text-dark-secondary
@@ -184,8 +188,8 @@ export default function MessagePage(): JSX.Element {
 
 MessagePage.getLayout = (page: ReactElement): ReactNode => (
   <ProtectedLayout>
-    <MainLayout>
-      <TrendsLayout>{page}</TrendsLayout>
-    </MainLayout>
+    <MainLayoutWithoutSidebar>
+      <MessageLayout>{page}</MessageLayout>
+    </MainLayoutWithoutSidebar>
   </ProtectedLayout>
 );

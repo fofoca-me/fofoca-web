@@ -136,7 +136,7 @@ export function MobileSidebarModal({
       />
       <section className='mt-0.5 flex flex-col gap-2 px-4'>
         <Link href={userLink}>
-          <span className='blur-picture relative h-20 rounded-md'>
+          <span className='blur-picture relative h-20 rounded-md block border-red-500'>
             {coverPhotoURL ? (
               <NextImage
                 useSkeleton

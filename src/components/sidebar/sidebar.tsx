@@ -9,7 +9,7 @@ import {
   CiSearch
 } from 'react-icons/ci';
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
+import LogoCat from '@components/common/logo-cat';
 import { query, where } from 'firebase/firestore';
 import { useAuth } from '@lib/context/auth-context';
 import { useWindow } from '@lib/context/window-context';
@@ -24,6 +24,7 @@ import { SidebarLink } from './sidebar-link';
 import { MoreSettings } from './more-settings';
 import { SidebarProfile } from './sidebar-profile';
 import type { ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
 
 import type * as SolidIcons from '@heroicons/react/24/solid';
 import type * as OutlineIcons from '@heroicons/react/24/outline';
@@ -46,6 +47,7 @@ export type NewNavLinks = Omit<NavLink, 'iconName'>;
 export function Sidebar(): JSX.Element {
   const { user } = useAuth();
   const { isMobile } = useWindow();
+  const path = usePathname();
 
   const { open, openModal, closeModal } = useModal();
 
@@ -61,8 +63,8 @@ export function Sidebar(): JSX.Element {
     {
       href: '/trends',
       linkName: 'Tendências',
+      canBeHidden: true,
       disabled: false,
-      canBeHidden: false,
       count: 0,
       icon: <CiHashtag size={34} />
     },
@@ -70,7 +72,6 @@ export function Sidebar(): JSX.Element {
       href: '/notifications',
       linkName: 'Notificações',
       disabled: false,
-      isNotification: true,
       count: 0,
       icon: <CiBellOn size={34} />
     },
@@ -91,7 +92,6 @@ export function Sidebar(): JSX.Element {
       href: '/search',
       linkName: 'Pesquisar',
       disabled: false,
-      canBeHidden: true,
       icon: <CiSearch size={34} />
     }
   ]);
@@ -163,19 +163,18 @@ export function Sidebar(): JSX.Element {
                            focus-visible:bg-accent-blue/10 focus-visible:!ring-accent-blue/80
                            '
               >
-                <Image
-                  alt='Logo da fofoca-me'
-                  width={64}
-                  height={64}
-                  src={'/logo-fofocame.png'}
-                />
+                <LogoCat width={64} height={64} />
               </span>
             </Link>
           </h1>
           <nav className='flex items-center justify-around xs:flex-col xs:justify-center xl:block'>
-            {navLinksWithCount.map(({ ...linkData }) => (
-              <SidebarLink {...linkData} key={linkData.href} />
-            ))}
+            {navLinksWithCount.map(({ ...linkData }) => {
+              if(!linkData.canBeHidden) {
+                return (
+                  <SidebarLink {...linkData} key={linkData.href} />
+                );
+              }
+            })}
             <SidebarLink
               href={`/user/${username}`}
               username={username}
@@ -184,18 +183,20 @@ export function Sidebar(): JSX.Element {
             />
             {!isMobile && <MoreSettings />}
           </nav>
-          <Button
-            className='accent-tab absolute right-4 -translate-y-[72px] bg-main-accent text-lg font-bold text-white
-                      outline-none transition hover:brightness-90 active:brightness-75 xs:static xs:translate-y-0
-                      xs:hover:bg-main-accent/90 xs:active:bg-main-accent/75 xl:w-11/12'
-            onClick={openModal}
-          >
-            <CustomIcon
-              className='block h-6 w-6 xl:hidden'
-              iconName='FeatherIcon'
-            />
-            <p className='hidden xl:block'>Fofocar</p>
-          </Button>
+          {!path.includes('messages/') && (
+            <Button
+              className='accent-tab absolute right-4 -translate-y-[72px] bg-main-accent text-lg font-bold text-white
+                       outline-none transition hover:brightness-90 active:brightness-75 xs:static xs:translate-y-0
+                       xs:hover:bg-main-accent/90 xs:active:bg-main-accent/75 xl:w-11/12'
+              onClick={openModal}
+            >
+              <CustomIcon
+                className='block h-6 w-6 xl:hidden'
+                iconName='FeatherIcon'
+              />
+              <p className='hidden xl:block'>Fofocar</p>
+            </Button>
+          )}
         </section>
         {!isMobile && <SidebarProfile />}
       </div>
