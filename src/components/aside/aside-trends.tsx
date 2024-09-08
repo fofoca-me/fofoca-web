@@ -21,26 +21,28 @@ export const variants: MotionProps = {
 
 export function AsideTrends(): JSX.Element {
   const { data, loading } = useCollection(
-    query(
-      trendsCollection,
-      orderBy('counter', 'desc'),
-      ...([limit(3)])
-    ),
+    query(trendsCollection, orderBy('counter', 'desc'), ...[limit(3)]),
     { allowNull: true, includeUser: true }
   );
 
   return (
-    <section className='bg-white rounded-md shadow-md  border border-gray-200 dark:bg-zinc-900 dark:border-main-background'>
+    <section className='rounded-md border border-gray-200  bg-white shadow-md dark:border-main-background dark:bg-zinc-900'>
       {loading ? (
         <Loading />
       ) : data ? (
-        <motion.div
-          className={cn('inner:px-4 inner')}
-          {...variants}
-        >
-          <h2 className='text-xl font-extrabold py-3'>Tendências para você</h2>
+        <motion.div className={cn('inner inner:px-4')} {...variants}>
+          <div className='py-3'>
+            <h2 className='text-xl font-extrabold'>Na boca do povo</h2>
+            <p className='text-sm font-normal text-light-secondary dark:text-dark-secondary'>
+              Tendências
+            </p>
+          </div>
           {data.map(({ text, counter, user: { name } }) => (
-            <Link href={''} key={text} className='hover-animation accent-tab hover-card relative px-4 py-3 block'>
+            <Link
+              href={''}
+              key={text}
+              className='hover-animation accent-tab hover-card relative block px-4 py-3'
+            >
               <span
                 className='flex  flex-col gap-0.5'
                 onClick={preventBubbling()}
@@ -73,8 +75,11 @@ export function AsideTrends(): JSX.Element {
               </span>
             </Link>
           ))}
-          <Link href='/trends' className='custom-button py-4 accent-tab hover-card block w-full rounded-2xl
-          rounded-t-none text-center text-main-accent'>
+          <Link
+            href='/trends'
+            className='custom-button accent-tab hover-card block w-full rounded-2xl rounded-t-none
+          py-4 text-center text-main-accent'
+          >
             Mostrar mais
           </Link>
         </motion.div>

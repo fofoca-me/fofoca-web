@@ -16,7 +16,7 @@ import { MainHeader } from '@components/home/main-header';
 import { UpdateUsername } from '@components/home/update-username';
 import type { User } from '@lib/types/user';
 
-export default function Pesquisar(): JSX.Element {
+export default function SearchPage(): JSX.Element {
   const [input, setInput] = useState('');
   const [dataUsers, setDataUsers] = useState<User[]>([]);
 
@@ -71,7 +71,7 @@ export default function Pesquisar(): JSX.Element {
   );
 }
 
-Pesquisar.getLayout = (page: ReactElement): ReactNode => (
+SearchPage.getLayout = (page: ReactElement): ReactNode => (
   <ProtectedLayout>
     <MainLayout>
       <ExploreLayout>{page}</ExploreLayout>

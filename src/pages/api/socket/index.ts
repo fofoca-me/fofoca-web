@@ -29,7 +29,7 @@ export default async function handler(
     path: '/api/socket'
   });
 
-  io.on('connection', (socket) => onConnection(io, socket as any, user));
+  io.on('connection', (socket) => onConnection(socket as any, user));
 
   res.socket.server.io = io;
   res.status(200).send('Socket initialized');

@@ -10,8 +10,8 @@ import { MainContainer } from '@components/home/main-container';
 import { Button } from '@components/ui/button';
 import { ToolTip } from '@components/ui/tooltip';
 import { HeroIcon } from '@components/ui/hero-icon';
-import { AsideNotifications } from '@components/aside/aside-notifications';
 import type { ReactElement, ReactNode } from 'react';
+import { NotificationCard } from '@components/common/notification-card';
 
 export default function Notifications(): JSX.Element {
   const { back } = useRouter();
@@ -29,7 +29,7 @@ export default function Notifications(): JSX.Element {
         </Button>
       </MainHeader>
 
-      <AsideNotifications inNotificationsPage />
+      <NotificationCard />
     </MainContainer>
   );
 }

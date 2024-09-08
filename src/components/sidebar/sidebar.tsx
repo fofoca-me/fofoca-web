@@ -42,53 +42,6 @@ export type NavLink = {
   count?: number;
 };
 
-const navLinks: Readonly<NavLink[]> = [
-  {
-    href: '/home',
-    linkName: 'Home',
-    iconName: 'HomeIcon',
-    icon: <CiHome size={34} />
-  },
-  {
-    href: '/explore',
-    linkName: 'Explorar',
-    iconName: 'HashtagIcon',
-    disabled: true,
-    canBeHidden: true,
-    icon: <CiHashtag size={34} />
-  },
-  {
-    href: '/notifications',
-    linkName: 'Notificações',
-    iconName: 'BellIcon',
-    disabled: false,
-    isNotification: true,
-    icon: <CiBellOn size={34} />
-  },
-  {
-    href: '/messages',
-    linkName: 'Mensagens',
-    iconName: 'EnvelopeIcon',
-    disabled: false,
-    icon: <CiMail size={34} />
-  },
-  {
-    href: '/bookmarks',
-    linkName: 'Babados',
-    iconName: 'BookmarkIcon',
-    canBeHidden: true,
-    icon: <CiBookmark size={34} />
-  },
-  {
-    href: '/search',
-    linkName: 'Pesquisar',
-    iconName: 'Bars3BottomLeftIcon',
-    disabled: false,
-    canBeHidden: true,
-    icon: <CiSearch size={34} />
-  }
-];
-
 export type NewNavLinks = Omit<NavLink, 'iconName'>;
 
 export function Sidebar(): JSX.Element {
@@ -126,7 +79,6 @@ export function Sidebar(): JSX.Element {
     {
       href: '/messages',
       linkName: 'Mensagens',
-      disabled: true,
       count: 0,
       icon: <CiMail size={34} />
     },
