@@ -100,7 +100,7 @@ export default function Bookmarks(): JSX.Element {
           <StatsEmpty
             title='Salvar fofoquinhas para mais tarde'
             description='Não perca os bons momentos! Salve suas Fofocas para encontrá-las facilmente no futuro.'
-            imageData={{ src: '/assets/no-bookmarks.png', alt: 'No bookmarks' }}
+            imageData={{ src: '/assets/fofoquinhas.png', alt: 'No bookmarks' }}
           />
         ) : (
           <AnimatePresence mode='popLayout'>
