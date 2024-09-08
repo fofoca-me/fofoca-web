@@ -1,7 +1,7 @@
 const footerLinks = [
   ['Home', 'https://fofoca.me'],
   ['Contato', 'mailto:contato@fofoca.me'],
-  ['Política de Privacidade', '/rules-and-policies/privacy-policy'],
+  ['Política de Privacidade', '/rules-and-policies/policy'],
   ['Política de Cookies', '/rules-and-policies/cookies'],
   ['Termos de uso', '/rules-and-policies/terms']
 ] as const;

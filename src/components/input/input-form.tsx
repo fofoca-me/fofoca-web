@@ -1,19 +1,19 @@
+import { ActionModal } from '@components/modal/action-modal';
+import { Modal } from '@components/modal/modal';
+import { Button } from '@components/ui/button';
+import { HeroIcon } from '@components/ui/hero-icon';
+import { useModal } from '@lib/hooks/useModal';
+import type { Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
+import type {
+  ChangeEvent,
+  ClipboardEvent,
+  KeyboardEvent,
+  ReactNode,
+  RefObject
+} from 'react';
 import { useEffect } from 'react';
 import TextArea from 'react-textarea-autosize';
-import { motion } from 'framer-motion';
-import { useModal } from '@lib/hooks/useModal';
-import { Modal } from '@components/modal/modal';
-import { ActionModal } from '@components/modal/action-modal';
-import { HeroIcon } from '@components/ui/hero-icon';
-import { Button } from '@components/ui/button';
-import type {
-  ReactNode,
-  RefObject,
-  ChangeEvent,
-  KeyboardEvent,
-  ClipboardEvent
-} from 'react';
-import type { Variants } from 'framer-motion';
 
 type InputFormProps = {
   modal?: boolean;
@@ -73,7 +73,6 @@ export function InputForm({
 
   useEffect(() => handleShowHideNav(true), []);
 
-
   const handleKeyboardShortcut = ({
     key,
     ctrlKey
@@ -131,13 +130,13 @@ export function InputForm({
         {isVisibilityShown && (
           <motion.button
             type='button'
-            className='custom-button accent-tab accent-bg-tab flex cursor-not-allowed items-center gap-1
-                       self-start border border-light-line-reply py-0 px-3 text-main-accent
-                       hover:bg-main-accent/10 active:bg-main-accent/20 dark:border-light-secondary'
+            className='custom-button accent-tab accent-bg-tab pointer-events-none flex cursor-not-allowed items-center
+                       gap-1 self-start border border-light-line-reply py-0 px-3
+                       text-main-accent hover:bg-main-accent/10 active:bg-main-accent/20 dark:border-light-secondary'
             {...fromTop}
           >
             <p className='font-bold'>Todos</p>
-            <HeroIcon className='h-4 w-4' iconName='ChevronDownIcon' />
+            {/* <HeroIcon className='h-4 w-4' iconName='ChevronDownIcon' /> */}
           </motion.button>
         )}
         <div className='flex items-center gap-3'>
@@ -176,10 +175,10 @@ export function InputForm({
         >
           <button
             type='button'
-            className='custom-button accent-tab accent-bg-tab flex cursor-not-allowed items-center gap-1 py-0
-                       px-3 text-main-accent hover:bg-main-accent/10 active:bg-main-accent/20'
+            className='custom-button accent-tab accent-bg-tab pointer-events-none flex cursor-not-allowed items-center gap-1
+                       py-0 px-3 text-main-accent hover:bg-main-accent/10 active:bg-main-accent/20'
           >
-            <HeroIcon className='h-4 w-4' iconName='GlobeAmericasIcon' />
+            <HeroIcon className='h-4 w-4' iconName='InformationCircleIcon' />
             <p className='font-bold'>Todos podem responder</p>
           </button>
         </motion.div>

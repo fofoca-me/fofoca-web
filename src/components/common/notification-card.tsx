@@ -1,18 +1,17 @@
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { query, updateDoc, where, doc, orderBy } from 'firebase/firestore';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { preventBubbling } from '@lib/utils';
-import { notificationsCollection } from '@lib/firebase/collections';
-import { useInfiniteScroll } from '@lib/hooks/useInfiniteScroll';
-import { useAuth } from '@lib/context/auth-context';
+import { NotificationTypes } from '@components/common/notifications';
 import { Error } from '@components/ui/error';
 import { Loading } from '@components/ui/loading';
-import { NotificationTypes } from '@components/common/notifications';
+import { useAuth } from '@lib/context/auth-context';
+import { notificationsCollection } from '@lib/firebase/collections';
+import { useInfiniteScroll } from '@lib/hooks/useInfiniteScroll';
 import type { NotificationWithUser } from '@lib/types/notification';
+import { preventBubbling } from '@lib/utils';
+import { doc, query, updateDoc, where } from 'firebase/firestore';
 import type { MotionProps } from 'framer-motion';
-import { formatDate } from '@lib/date';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export const variants: MotionProps = {
   initial: { opacity: 0 },

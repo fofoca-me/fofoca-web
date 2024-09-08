@@ -1,17 +1,17 @@
-import { AnimatePresence } from 'framer-motion';
-import { query, where } from 'firebase/firestore';
-import { useCollection } from '@lib/hooks/useCollection';
-import { tweetsCollection } from '@lib/firebase/collections';
-import { useUser } from '@lib/context/user-context';
-import { mergeData } from '@lib/merge';
-import { UserLayout, ProtectedLayout } from '@components/layout/common-layout';
-import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
+import { ProtectedLayout, UserLayout } from '@components/layout/common-layout';
+import { MainLayout } from '@components/layout/main-layout';
 import { UserDataLayout } from '@components/layout/user-data-layout';
 import { UserHomeLayout } from '@components/layout/user-home-layout';
+import { StatsEmpty } from '@components/tweet/stats-empty';
 import { Tweet } from '@components/tweet/tweet';
 import { Loading } from '@components/ui/loading';
-import { StatsEmpty } from '@components/tweet/stats-empty';
+import { useUser } from '@lib/context/user-context';
+import { tweetsCollection } from '@lib/firebase/collections';
+import { useCollection } from '@lib/hooks/useCollection';
+import { mergeData } from '@lib/merge';
+import { query, where } from 'firebase/firestore';
+import { AnimatePresence } from 'framer-motion';
 import type { ReactElement, ReactNode } from 'react';
 
 export default function UserMedia(): JSX.Element {
@@ -43,7 +43,7 @@ export default function UserMedia(): JSX.Element {
         <StatsEmpty
           title={`@${username as string} não fofocou mídia`}
           description='Assim que o fizerem, essas Fofocas aparecerão aqui.'
-          imageData={{ src: '/assets/no-media.png', alt: 'No media' }}
+          imageData={{ src: '/fofoca-midia.png', alt: 'No media' }}
         />
       ) : (
         <AnimatePresence mode='popLayout'>

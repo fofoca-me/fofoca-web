@@ -1,18 +1,17 @@
-import { AnimatePresence } from 'framer-motion';
-import { where, orderBy } from 'firebase/firestore';
-import { useWindow } from '@lib/context/window-context';
-import { useInfiniteScroll } from '@lib/hooks/useInfiniteScroll';
-import { tweetsCollection } from '@lib/firebase/collections';
-import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
-import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
 import { MainContainer } from '@components/home/main-container';
-import { Input } from '@components/input/input';
-import { UpdateUsername } from '@components/home/update-username';
 import { MainHeader } from '@components/home/main-header';
+import { Input } from '@components/input/input';
+import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
+import { MainLayout } from '@components/layout/main-layout';
 import { Tweet } from '@components/tweet/tweet';
-import { Loading } from '@components/ui/loading';
 import { Error } from '@components/ui/error';
+import { Loading } from '@components/ui/loading';
+import { useWindow } from '@lib/context/window-context';
+import { tweetsCollection } from '@lib/firebase/collections';
+import { useInfiniteScroll } from '@lib/hooks/useInfiniteScroll';
+import { orderBy, where } from 'firebase/firestore';
+import { AnimatePresence } from 'framer-motion';
 import type { ReactElement, ReactNode } from 'react';
 
 export default function Home(): JSX.Element {
@@ -33,7 +32,7 @@ export default function Home(): JSX.Element {
         title='Só fuxico'
         className='flex items-center justify-between'
       >
-        <UpdateUsername />
+        {/* <UpdateUsername /> */}
       </MainHeader>
       {!isMobile && <Input />}
       <section className='mt-0.5 py-4 xs:mt-0'>

@@ -95,11 +95,9 @@ function getShortTime(date: Date): string {
 function getRelativeTime(date: Date): string {
   const relativeTime = calculateRelativeTime(date);
 
-  if (relativeTime === 'now') return 'agora';
+  if (relativeTime === 'now') return relativeTime;
 
-  const [number, unit] = relativeTime.split(' ');
-
-  return `${number} ${unit}mins`;
+  return `${relativeTime}`;
 }
 
 function calculateRelativeTime(date: Date): string {

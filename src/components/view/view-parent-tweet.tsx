@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import { doc } from 'firebase/firestore';
-import { useDocument } from '@lib/hooks/useDocument';
-import { tweetsCollection } from '@lib/firebase/collections';
 import { Tweet } from '@components/tweet/tweet';
+import { tweetsCollection } from '@lib/firebase/collections';
+import { useDocument } from '@lib/hooks/useDocument';
+import { doc } from 'firebase/firestore';
 import type { RefObject } from 'react';
+import { useEffect } from 'react';
 
 type ViewParentTweetProps = {
   parentId: string;
@@ -32,15 +32,7 @@ export function ViewParentTweet({
           className='rounded-2xl bg-main-sidebar-background py-3 px-1 pl-4 
                      text-light-secondary dark:text-dark-secondary'
         >
-          Esta Fofoca foi excluída pelo autor da Fofoca 👍.{' '}
-          <a
-            className='custom-underline text-main-accent'
-            href='https://help.twitter.com/rules-and-policies/notices-on-twitter'
-            target='_blank'
-            rel='noreferrer'
-          >
-            Saber mais
-          </a>
+          Esta Fofoca foi excluída pelo autor da Fofoca 👍.
         </p>
       </div>
     );

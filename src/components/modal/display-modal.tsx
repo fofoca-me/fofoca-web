@@ -1,9 +1,9 @@
-import { UserAvatar } from '@components/user/user-avatar';
-import { UserName } from '@components/user/user-name';
+import { InputAccentRadio } from '@components/input/input-accent-radio';
 import { InputThemeRadio } from '@components/input/input-theme-radio';
 import { Button } from '@components/ui/button';
-import { InputAccentRadio } from '@components/input/input-accent-radio';
-import type { Theme, Accent } from '@lib/types/theme';
+import { UserAvatar } from '@components/user/user-avatar';
+import { UserName } from '@components/user/user-name';
+import type { Accent, Theme } from '@lib/types/theme';
 
 type DisplayModalProps = {
   closeModal: () => void;
@@ -31,7 +31,7 @@ export function DisplayModal({ closeModal }: DisplayModalProps): JSX.Element {
                    border-light-border px-4 py-3 dark:border-dark-border'
       >
         <div className='grid grid-cols-[auto,1fr] gap-3'>
-          <UserAvatar src='/assets/twitter-avatar.jpg' alt='Twitter' />
+          <UserAvatar src='/logo192.png' alt='Fofoca.me' />
           <div>
             <div className='flex gap-1'>
               <UserName verified name='Fofoca.me' />
