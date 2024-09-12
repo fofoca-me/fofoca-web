@@ -96,9 +96,9 @@ export function MoreSettings(): JSX.Element {
                           'flex w-full gap-3 rounded-t-md p-4 duration-200',
                           active && 'bg-main-sidebar-background'
                         )}
-                        href='/talktous'
+                        href='/contact'
                       >
-                        <HeroIcon iconName='QuestionMarkCircleIcon' />
+                        <HeroIcon iconName='EnvelopeIcon' />
                         Fale conosco
                       </MenuLink>
                     )}

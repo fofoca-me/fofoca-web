@@ -90,7 +90,10 @@ export default function Contact() {
 
         <button
           type='submit'
-          className='w-full rounded-md bg-pink-600 px-4 py-2 text-white hover:bg-pink-700'
+          // className='w-full rounded-md bg-pink-600 px-4 py-2 text-white hover:bg-pink-700'
+          className='accent-tab w-full rounded-md bg-main-accent px-4 py-2 text-lg font-bold text-white
+             outline-none transition hover:brightness-90 active:brightness-75
+             '
         >
           Enviar
         </button>
