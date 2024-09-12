@@ -91,6 +91,20 @@ export function MoreSettings(): JSX.Element {
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }): JSX.Element => (
+                      <MenuLink
+                        className={cn(
+                          'flex w-full gap-3 rounded-t-md p-4 duration-200',
+                          active && 'bg-main-sidebar-background'
+                        )}
+                        href='/talktous'
+                      >
+                        <HeroIcon iconName='QuestionMarkCircleIcon' />
+                        Fale conosco
+                      </MenuLink>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }): JSX.Element => (
                       <Button
                         className={cn(
                           'flex w-full gap-3 rounded-none rounded-b-md p-4 duration-200',
