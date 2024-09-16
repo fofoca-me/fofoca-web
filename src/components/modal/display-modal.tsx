@@ -10,7 +10,7 @@ type DisplayModalProps = {
 };
 
 const themes: Readonly<[Theme, string][]> = [
-  ['light', 'Astigmatismo'],
+  ['light', 'Iluminado'],
   ['dim', 'Cineminha'],
   ['dark', 'Apagão']
 ];
