@@ -3,6 +3,7 @@ import { CustomIcon } from '@components/ui/custom-icon';
 import { useAuth } from '@lib/context/auth-context';
 import Image from 'next/image';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 type TLoginSingUp = {
   isModalOpen: boolean;
@@ -17,17 +18,35 @@ export function LoginSingUp({
   title,
   googleProviderTitle
 }: TLoginSingUp): JSX.Element {
-  const { signUpWithEmail, signInWithGoogle } = useAuth();
+  const { signUpWithEmail, signInWithGoogle, error } = useAuth();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [confirmShowPassword, setConfirmShowPassword] =
+    useState<boolean>(false);
 
   const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (password.length <= 5) {
+      toast.error('A senha deve ter no mínimo 6 caracteres.');
+      return;
+    }
+
+    if (password != confirmPassword) {
+      toast.error('As senhas não coincidem.');
+      return;
+    }
+
     void signUpWithEmail(email, password);
-    // onCloseModal(false);
-    // setPassword('');
-    // setEmail('');
+
+    if (error?.message.split('(')[1] === 'auth/email-already-in-use).') {
+      toast.error('O e-mail já está em uso.');
+      return;
+    }
+
+    setPassword('');
+    setEmail('');
   };
 
   return isModalOpen ? (
@@ -111,6 +130,39 @@ export function LoginSingUp({
                 <div
                   className='absolute right-4'
                   onClick={() => setShowPassword(true)}
+                >
+                  <CustomIcon
+                    iconName='EyeOn'
+                    className='h-4 w-auto cursor-pointer'
+                  />
+                </div>
+              )}
+            </div>
+
+            <div className='relative flex w-full items-center justify-between'>
+              <input
+                className='w-full rounded-md border border-gray-500/20 bg-transparent p-4'
+                type={confirmShowPassword ? 'text' : 'password'}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder='Confirme a Senha'
+                required
+              />
+
+              {confirmShowPassword ? (
+                <div
+                  className='absolute right-4'
+                  onClick={() => setConfirmShowPassword(false)}
+                >
+                  <CustomIcon
+                    iconName='EyeOff'
+                    className='h-4 w-auto cursor-pointer'
+                  />
+                </div>
+              ) : (
+                <div
+                  className='absolute right-4'
+                  onClick={() => setConfirmShowPassword(true)}
                 >
                   <CustomIcon
                     iconName='EyeOn'

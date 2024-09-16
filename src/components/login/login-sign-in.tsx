@@ -17,17 +17,18 @@ export function LoginSingIn({
   title,
   googleProviderTitle
 }: TLoginSingIn): JSX.Element {
-  const { signInManual, signInWithGoogle } = useAuth();
+  const { signInManual, signInWithGoogle, error } = useAuth();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     void signInManual(email, password);
-    // onCloseModal(false);
-    // setPassword('');
-    // setEmail('');
+
+    setPassword('');
+    setEmail('');
   };
 
   return isModalOpen ? (

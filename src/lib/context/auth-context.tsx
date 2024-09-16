@@ -29,6 +29,7 @@ import {
 import nookies from 'nookies';
 import type { ReactNode } from 'react';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import toast from 'react-hot-toast';
 
 type AuthContext = {
   user: User | null;
@@ -186,6 +187,7 @@ export function AuthContextProvider({
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
+      toast.error('E-mail ou senha incorreto.');
       setError(error as Error);
     }
   };
