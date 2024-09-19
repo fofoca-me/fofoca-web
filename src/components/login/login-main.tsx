@@ -3,9 +3,16 @@ import { CustomIcon } from '@components/ui/custom-icon';
 import { NextImage } from '@components/ui/next-image';
 import { useAuth } from '@lib/context/auth-context';
 import Image from 'next/image';
+import { useState } from 'react';
+import { LoginSingIn } from './login-sign-in';
+import { LoginSingUp } from './login-sign-up';
 
 export function LoginMain(): JSX.Element {
   const { signInWithGoogle } = useAuth();
+  const [isSignInOpen, setIsSignInOpen] = useState<boolean>(false);
+  const handleCloseSignIn = () => setIsSignInOpen(!isSignInOpen);
+  const [isSignUpOpen, setIsSignUpOpen] = useState<boolean>(false);
+  const handleCloseSignUp = () => setIsSignUpOpen(!isSignUpOpen);
 
   return (
     <main className='grid lg:grid-cols-[1fr,45vw]'>
@@ -46,12 +53,22 @@ export function LoginMain(): JSX.Element {
             >
               <CustomIcon iconName='GoogleIcon' /> Inscreva-se com Google
             </Button>
-            <Button
+
+            {/* <Button
               className='flex cursor-not-allowed justify-center gap-2 border border-light-line-reply font-bold text-light-primary
                          transition hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0
                          dark:bg-white dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
             >
               <CustomIcon iconName='AppleIcon' /> Inscreva-se com Apple
+            </Button> */}
+
+            <Button
+              onClick={() => setIsSignUpOpen(true)}
+              className='border border-light-line-reply bg-[#EF2182] font-bold text-[#FFF] hover:bg-[#EF2182]/10
+                         focus-visible:bg-[#EF2182]/10 focus-visible:!ring-[#EF2182]/80 active:bg-[#EF2182]/20
+                         dark:border-light-secondary'
+            >
+              Criar conta
             </Button>
 
             <p
@@ -85,19 +102,34 @@ export function LoginMain(): JSX.Element {
               .
             </p>
           </div>
+
           <div className='flex flex-col gap-3'>
             <p className='font-bold'>Já tem uma conta?</p>
             <Button
               className='border border-light-line-reply font-bold text-[#EF2182] hover:bg-[#EF2182]/10
                          focus-visible:bg-[#EF2182]/10 focus-visible:!ring-[#EF2182]/80 active:bg-[#EF2182]/20
                          dark:border-light-secondary'
-              onClick={signInWithGoogle}
+              onClick={() => setIsSignInOpen(true)}
             >
               Entrar
             </Button>
           </div>
         </div>
       </div>
+
+      <LoginSingIn
+        title='Faça o login no Fofoca.me'
+        googleProviderTitle='Entrar'
+        isModalOpen={isSignInOpen}
+        onCloseModal={handleCloseSignIn}
+      />
+
+      <LoginSingUp
+        title='Cadastre-se no Fofoca.me'
+        googleProviderTitle='Inscreva-se'
+        isModalOpen={isSignUpOpen}
+        onCloseModal={handleCloseSignUp}
+      />
     </main>
   );
 }

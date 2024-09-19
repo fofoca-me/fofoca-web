@@ -11,8 +11,10 @@ import type { Stats } from '@lib/types/stats';
 import type { User } from '@lib/types/user';
 import type { User as AuthUser } from 'firebase/auth';
 import {
+  createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut as signOutFirebase
 } from 'firebase/auth';
@@ -27,6 +29,7 @@ import {
 import nookies from 'nookies';
 import type { ReactNode } from 'react';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import toast from 'react-hot-toast';
 
 type AuthContext = {
   user: User | null;
@@ -37,6 +40,8 @@ type AuthContext = {
   userBookmarks: Bookmark[] | null;
   signOut: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
+  signUpWithEmail: (email: string, password: string) => Promise<void>;
+  signInManual: (email: string, password: string) => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthContext | null>(null);
@@ -171,6 +176,22 @@ export function AuthContextProvider({
     }
   };
 
+  const signUpWithEmail = async (email: string, password: string) => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      setError(error as Error);
+    }
+  };
+  const signInManual = async (email: string, password: string) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      toast.error('E-mail ou senha incorreto.');
+      setError(error as Error);
+    }
+  };
+
   const signOut = async (): Promise<void> => {
     try {
       await signOutFirebase(auth);
@@ -190,7 +211,9 @@ export function AuthContextProvider({
     randomSeed,
     userBookmarks,
     signOut,
-    signInWithGoogle
+    signInWithGoogle,
+    signUpWithEmail,
+    signInManual
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
