@@ -96,7 +96,7 @@ export default function MessagePage(): JSX.Element {
   return (
     <main
       className={cn(
-        'hover-animation flex min-h-[90vh] w-full max-w-xl flex-col xl:min-h-screen'
+        'hover-animation h-dvh flex w-full max-w-xl flex-col xl:min-h-screen'
       )}
     >
       <SEO title='Mensagens / Fofoca.me' />
