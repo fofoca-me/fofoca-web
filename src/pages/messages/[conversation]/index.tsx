@@ -112,7 +112,7 @@ export default function MessagePage(): JSX.Element {
       {loading ? (
         <Loading />
       ) : (
-        <div className='w-full h-[calc(100vh-52px)] '>
+        <div className='w-full h-[calc(100dvh-52px)] '>
           <div className='
             items-center relative gap-0.5
             rounded-md bg-white dark:border-main-background
