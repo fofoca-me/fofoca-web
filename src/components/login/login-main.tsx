@@ -1,9 +1,9 @@
+import Image from 'next/image';
+import { useState } from 'react';
+import { useAuth } from '@lib/context/auth-context';
 import { Button } from '@components/ui/button';
 import { CustomIcon } from '@components/ui/custom-icon';
 import { NextImage } from '@components/ui/next-image';
-import { useAuth } from '@lib/context/auth-context';
-import Image from 'next/image';
-import { useState } from 'react';
 import { LoginSingIn } from './login-sign-in';
 import { LoginSingUp } from './login-sign-up';
 

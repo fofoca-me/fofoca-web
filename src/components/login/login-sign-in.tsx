@@ -1,8 +1,8 @@
-import { Button } from '@components/ui/button';
-import { CustomIcon } from '@components/ui/custom-icon';
-import { useAuth } from '@lib/context/auth-context';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useAuth } from '@lib/context/auth-context';
+import { Button } from '@components/ui/button';
+import { CustomIcon } from '@components/ui/custom-icon';
 
 type TLoginSingIn = {
   isModalOpen: boolean;
@@ -33,11 +33,11 @@ export function LoginSingIn({
 
   return isModalOpen ? (
     <div
-      className='fixed top-0 left-0 right-0 bottom-0 z-[1000] flex items-center justify-center bg-[#0000007f]'
+      className='fixed top-0 left-0 right-0 bottom-0 z-[1000] flex items-center justify-center bg-[#0000007f] '
       onClick={() => onCloseModal(false)}
     >
       <div
-        className='relative flex min-w-[550px] flex-col items-center justify-center rounded-lg bg-light-primary py-4 px-12'
+        className='relative flex min-w-[550px] flex-col items-center justify-center rounded-lg bg-main-background py-4 px-12'
         onClick={(e) => e.stopPropagation()}
       >
         <div className='flex max-w-[364px] flex-col gap-4'>
@@ -123,7 +123,7 @@ export function LoginSingIn({
 
             <Button
               type='submit'
-              className='border border-light-line-reply bg-[#EF2182] font-bold text-[#FFF] hover:bg-[#EF2182]/10
+              className='border border-light-line-reply bg-main-accent font-bold text-[#FFF] hover:bg-[#EF2182]/10
                          focus-visible:bg-[#EF2182]/10 focus-visible:!ring-[#EF2182]/80 active:bg-[#EF2182]/20
                          dark:border-light-secondary'
             >

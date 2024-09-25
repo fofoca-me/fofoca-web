@@ -6,8 +6,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP,
-  port: 587, // Porta TLS
-  secure: false, // Não use SSL/TLS aqui, mas utilize STARTTLS
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
