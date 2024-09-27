@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import Image from 'next/image';
 import { useState } from 'react';
 import { useAuth } from '@lib/context/auth-context';
@@ -7,11 +8,33 @@ import { NextImage } from '@components/ui/next-image';
 import { LoginSingIn } from './login-sign-in';
 import { LoginSingUp } from './login-sign-up';
 
+interface Navigator {
+  standalone?: boolean;
+}
+
+const isWebView = (): boolean => {
+  if (typeof window === 'undefined' || typeof navigator === 'undefined')
+    return false;
+
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  if (/iPhone|iPod|iPad/i.test(userAgent) && !window.MSStream)
+    return (
+      ((window.navigator as Navigator).standalone ||
+        /safari/i.test(userAgent)) === false
+    );
+
+  return /wv|Android.*AppleWebKit(?!.*Safari)/i.test(userAgent);
+};
+
 export function LoginMain(): JSX.Element {
   const { signInWithGoogle } = useAuth();
   const [isSignInOpen, setIsSignInOpen] = useState<boolean>(false);
-  const handleCloseSignIn = () => setIsSignInOpen(!isSignInOpen);
   const [isSignUpOpen, setIsSignUpOpen] = useState<boolean>(false);
+
+  const isInWebView = isWebView();
+
+  const handleCloseSignIn = () => setIsSignInOpen(!isSignInOpen);
   const handleCloseSignUp = () => setIsSignUpOpen(!isSignUpOpen);
 
   return (
@@ -45,14 +68,16 @@ export function LoginMain(): JSX.Element {
         </div>
         <div className='flex max-w-xs flex-col gap-6 [&_button]:py-2'>
           <div className='grid gap-3 font-bold'>
-            <Button
-              className='flex justify-center gap-2 border border-light-line-reply font-bold text-light-primary transition
+            {!isInWebView && (
+              <Button
+                className='flex justify-center gap-2 border border-light-line-reply font-bold text-light-primary transition
                          hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0 dark:bg-white
                          dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
-              onClick={signInWithGoogle}
-            >
-              <CustomIcon iconName='GoogleIcon' /> Inscreva-se com Google
-            </Button>
+                onClick={signInWithGoogle}
+              >
+                <CustomIcon iconName='GoogleIcon' /> Inscreva-se com Google
+              </Button>
+            )}
 
             {/* <Button
               className='flex cursor-not-allowed justify-center gap-2 border border-light-line-reply font-bold text-light-primary
@@ -122,6 +147,7 @@ export function LoginMain(): JSX.Element {
         googleProviderTitle='Entrar'
         isModalOpen={isSignInOpen}
         onCloseModal={handleCloseSignIn}
+        verifyWebView={isInWebView}
       />
 
       <LoginSingUp

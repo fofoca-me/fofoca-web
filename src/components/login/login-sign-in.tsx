@@ -9,13 +9,15 @@ type TLoginSingIn = {
   onCloseModal: (value: boolean) => void;
   title?: string;
   googleProviderTitle?: string;
+  verifyWebView: boolean;
 };
 
 export function LoginSingIn({
   isModalOpen,
   onCloseModal,
   title,
-  googleProviderTitle
+  googleProviderTitle,
+  verifyWebView
 }: TLoginSingIn): JSX.Element {
   const { signInManual, signInWithGoogle, error } = useAuth();
   const [email, setEmail] = useState<string>('');
@@ -53,15 +55,17 @@ export function LoginSingIn({
           <h2 className='font-twitter-chirp-extended text-3xl'>{title}</h2>
 
           <div className='grid gap-3 font-bold'>
-            <Button
-              className='flex justify-center gap-2 border border-light-line-reply font-bold text-light-primary transition
+            {!verifyWebView && (
+              <Button
+                className='flex justify-center gap-2 border border-light-line-reply font-bold text-light-primary transition
                          hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0 dark:bg-white
                          dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
-              onClick={signInWithGoogle}
-            >
-              <CustomIcon iconName='GoogleIcon' /> {googleProviderTitle} com
-              Google
-            </Button>
+                onClick={signInWithGoogle}
+              >
+                <CustomIcon iconName='GoogleIcon' /> {googleProviderTitle} com
+                Google
+              </Button>
+            )}
 
             {/* <Button
               className='flex cursor-not-allowed justify-center gap-2 border border-light-line-reply font-bold text-light-primary
