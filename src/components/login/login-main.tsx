@@ -20,8 +20,8 @@ const isWebView = (): boolean => {
 
   if (/iPhone|iPod|iPad/i.test(userAgent) && !window.MSStream)
     return (
-      ((window.navigator as Navigator).standalone ||
-        /safari/i.test(userAgent)) === false
+      (window.navigator as Navigator).standalone === false ||
+      /Instagram/.test(userAgent)
     );
 
   return /wv|Android.*AppleWebKit(?!.*Safari)/i.test(userAgent);
