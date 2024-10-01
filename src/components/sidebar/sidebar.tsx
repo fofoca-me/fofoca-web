@@ -9,13 +9,18 @@ import {
   CiSearch
 } from 'react-icons/ci';
 import { useState, useEffect } from 'react';
-import LogoCat from '@components/common/logo-cat';
 import { query, where } from 'firebase/firestore';
+import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import { useAuth } from '@lib/context/auth-context';
 import { useWindow } from '@lib/context/window-context';
 import { useModal } from '@lib/hooks/useModal';
 import { useCollection } from '@lib/hooks/useCollection';
-import { notificationsCollection, conversationsCollection } from '@lib/firebase/collections';
+import {
+  notificationsCollection,
+  conversationsCollection
+} from '@lib/firebase/collections';
+import LogoCat from '@components/common/logo-cat';
 import { Modal } from '@components/modal/modal';
 import { Input } from '@components/input/input';
 import { CustomIcon } from '@components/ui/custom-icon';
@@ -24,7 +29,6 @@ import { SidebarLink } from './sidebar-link';
 import { MoreSettings } from './more-settings';
 import { SidebarProfile } from './sidebar-profile';
 import type { ReactNode } from 'react';
-import { usePathname } from 'next/navigation';
 
 import type * as SolidIcons from '@heroicons/react/24/solid';
 import type * as OutlineIcons from '@heroicons/react/24/outline';
@@ -105,14 +109,11 @@ export function Sidebar(): JSX.Element {
   );
 
   const { data: conversations } = useCollection(
-    query(
-      conversationsCollection,
-      where('targetUserId', '==', user?.id)
-    )
+    query(conversationsCollection, where('targetUserId', '==', user?.id))
   );
 
   useEffect(() => {
-    if (notifications) {
+    if (notifications)
       setNavLinksWithCount((prevItems) =>
         prevItems.map((link: NewNavLinks) =>
           link.linkName === 'Notificações'
@@ -120,12 +121,10 @@ export function Sidebar(): JSX.Element {
             : link
         )
       );
-    }
   }, [notifications]);
 
   useEffect(() => {
-    if (conversations) {
-
+    if (conversations)
       setNavLinksWithCount((prevItems) =>
         prevItems.map((link: NewNavLinks) =>
           link.linkName === 'Mensagens'
@@ -133,7 +132,6 @@ export function Sidebar(): JSX.Element {
             : link
         )
       );
-    }
   }, [conversations]);
 
   return (
@@ -169,11 +167,8 @@ export function Sidebar(): JSX.Element {
           </h1>
           <nav className='flex items-center justify-around xs:flex-col xs:justify-center xl:block'>
             {navLinksWithCount.map(({ ...linkData }) => {
-              if(!linkData.canBeHidden) {
-                return (
-                  <SidebarLink {...linkData} key={linkData.href} />
-                );
-              }
+              if (!linkData.canBeHidden)
+                return <SidebarLink {...linkData} key={linkData.href} />;
             })}
             <SidebarLink
               href={`/user/${username}`}
@@ -184,18 +179,33 @@ export function Sidebar(): JSX.Element {
             {!isMobile && <MoreSettings />}
           </nav>
           {!path.includes('messages/') && (
-            <Button
-              className='accent-tab absolute right-4 -translate-y-[72px] bg-main-accent text-lg font-bold text-white
-                       outline-none transition hover:brightness-90 active:brightness-75 xs:static xs:translate-y-0
+            <>
+              <Button
+                className='accent-tab absolute right-4 -translate-y-[72px] bg-main-accent text-lg font-bold text-white
+              outline-none transition hover:brightness-90 active:brightness-75 xs:static xs:translate-y-0
                        xs:hover:bg-main-accent/90 xs:active:bg-main-accent/75 xl:w-11/12'
-              onClick={openModal}
-            >
-              <CustomIcon
-                className='block h-6 w-6 xl:hidden'
-                iconName='FeatherIcon'
-              />
-              <p className='hidden xl:block'>Fofocar</p>
-            </Button>
+                onClick={openModal}
+              >
+                <CustomIcon
+                  className='block h-6 w-6 xl:hidden'
+                  iconName='FeatherIcon'
+                />
+                <p className='hidden xl:block'>Fofocar</p>
+              </Button>
+
+              <a
+                href='https://play.google.com/store/apps/details?id=com.pinkecode.fofoca.ai'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='relative h-32 w-56'
+              >
+                <Image
+                  src='/assets/google-play-selo.png'
+                  alt='Login Background'
+                  fill
+                />
+              </a>
+            </>
           )}
         </section>
         {!isMobile && <SidebarProfile />}

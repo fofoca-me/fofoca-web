@@ -1,4 +1,7 @@
+/* eslint-disable linebreak-style */
 import cn from 'clsx';
+import Image from 'next/image';
+import { useWindow } from '@lib/context/window-context';
 import { Button } from '@components/ui/button';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { ToolTip } from '@components/ui/tooltip';
@@ -29,6 +32,7 @@ export function MainHeader({
   useMobileSidebar,
   action
 }: HomeHeaderProps): JSX.Element {
+  const { isMobile } = useWindow();
   return (
     <header
       className={cn(
@@ -51,11 +55,25 @@ export function MainHeader({
         </Button>
       )}
       {title && (
-        <div className='flex gap-8'>
+        <div className='flex items-center gap-8 md:gap-28'>
           {useMobileSidebar && <MobileSidebar />}
           <h2 className='text-xl font-bold' key={title}>
             {title}
           </h2>
+          {isMobile && (
+            <a
+              href='https://play.google.com/store/apps/details?id=com.pinkecode.fofoca.ai'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <Image
+                src='/assets/google-play-selo.png'
+                alt='Login Background'
+                width={140}
+                height={140}
+              />
+            </a>
+          )}
         </div>
       )}
       {children}
