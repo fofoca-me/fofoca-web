@@ -16,15 +16,11 @@ const isWebView = (): boolean => {
   if (typeof window === 'undefined' || typeof navigator === 'undefined')
     return false;
 
-  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  const userAgent = (navigator.userAgent ||
+    navigator.vendor ||
+    window.opera) as string;
 
-  if (/iPhone|iPod|iPad/i.test(userAgent) && !window.MSStream)
-    return (
-      (window.navigator as Navigator).standalone === false ||
-      /Instagram/.test(userAgent)
-    );
-
-  return /wv|Android.*AppleWebKit(?!.*Safari)/i.test(userAgent);
+  return !!userAgent?.includes('Instagram');
 };
 
 export function LoginMain(): JSX.Element {
@@ -154,6 +150,7 @@ export function LoginMain(): JSX.Element {
         title='Cadastre-se no Fofoca.me'
         googleProviderTitle='Inscreva-se'
         isModalOpen={isSignUpOpen}
+        verifyWebView={isInWebView}
         onCloseModal={handleCloseSignUp}
       />
     </main>
