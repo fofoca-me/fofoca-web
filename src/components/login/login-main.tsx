@@ -124,7 +124,7 @@ export function LoginMain(): JSX.Element {
             </p>
           </div>
 
-          <span>{navigator.userAgent || navigator.vendor || window.opera}</span>
+          <p>{navigator.userAgent || navigator.vendor || window.opera}</p>
 
           <div className='flex flex-col gap-3'>
             <p className='font-bold'>Já tem uma conta?</p>
