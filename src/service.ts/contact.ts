@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable linebreak-style */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import api from '@lib/api';

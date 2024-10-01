@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable linebreak-style */
 import nodemailer from 'nodemailer';
 import type { FormDataContact } from '@lib/types/contact';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP,
   port: 587,
