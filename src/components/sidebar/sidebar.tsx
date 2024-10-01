@@ -193,18 +193,20 @@ export function Sidebar(): JSX.Element {
                 <p className='hidden xl:block'>Fofocar</p>
               </Button>
 
-              <a
-                href='https://play.google.com/store/apps/details?id=com.pinkecode.fofoca.ai'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='relative h-32 w-56'
-              >
-                <Image
-                  src='/assets/google-play-selo.png'
-                  alt='Login Background'
-                  fill
-                />
-              </a>
+              {!isMobile && (
+                <a
+                  href='https://play.google.com/store/apps/details?id=com.pinkecode.fofoca.ai'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='relative h-32 w-56'
+                >
+                  <Image
+                    src='/assets/google-play-selo.png'
+                    alt='Login Background'
+                    fill
+                  />
+                </a>
+              )}
             </>
           )}
         </section>
