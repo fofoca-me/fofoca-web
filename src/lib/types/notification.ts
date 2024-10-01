@@ -7,6 +7,7 @@ export type Notification = {
   type: string;
   userId: string;
   targetUserId: string | null;
+  targetTweetId: string | null;
   createdAt: Timestamp;
   updatedAt: Timestamp | null;
 };

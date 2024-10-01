@@ -27,16 +27,14 @@ export default function App({
     <>
       <AppHead />
       <AuthContextProvider>
-        <SocketContextProvider>
-          <ThemeContextProvider>
-            {getLayout(<Component {...pageProps} />)}
-            {process.env.NEXT_PUBLIC_GTM_CONTAINER_ID && (
-              <GoogleTagManager
-                gtmId={process.env.NEXT_PUBLIC_GTM_CONTAINER_ID}
-              />
-            )}
-          </ThemeContextProvider>
-        </SocketContextProvider>
+        <ThemeContextProvider>
+          {getLayout(<Component {...pageProps} />)}
+          {process.env.NEXT_PUBLIC_GTM_CONTAINER_ID && (
+            <GoogleTagManager
+              gtmId={process.env.NEXT_PUBLIC_GTM_CONTAINER_ID}
+            />
+          )}
+        </ThemeContextProvider>
       </AuthContextProvider>
     </>
   );

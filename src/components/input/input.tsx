@@ -169,8 +169,8 @@ export function Input({
       toast.success(
         () => (
           <span className='flex gap-2'>
-            Your Tweet was sent
-            <Link href={`/tweet/${tweetId}`}>
+            Sua fofoca foi compartilhada
+            <Link href={`/fofoca/${tweetId}`}>
               <span className='custom-underline font-bold'>View</span>
             </Link>
           </span>
@@ -283,7 +283,7 @@ export function Input({
       {children}
       {reply && visited && (
         <motion.p
-          className='ml-[75px] -mb-2 mt-2 text-light-secondary text-sm dark:text-dark-secondary'
+          className='ml-[75px] -mb-2 mt-2 text-sm text-light-secondary dark:text-dark-secondary'
           {...fromTop}
         >
           Replying to{' '}
@@ -301,7 +301,7 @@ export function Input({
             ? 'pt-3 pb-1'
             : replyModal
             ? 'pt-0'
-            : 'bg-white dark:bg-zinc-900 dark:border-main-background rounded-b-md shadow-md',
+            : 'rounded-b-md bg-white shadow-md dark:border-main-background dark:bg-zinc-900',
           (disabled || loading) && 'pointer-events-none opacity-50'
         )}
         htmlFor={formId}

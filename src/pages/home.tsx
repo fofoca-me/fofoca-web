@@ -25,6 +25,16 @@ export default function Home(): JSX.Element {
     { includeUser: true, allowNull: true, preserve: true }
   );
 
+  //   const { data, loading, LoadMore } = useInfiniteScroll(
+  //     tweetsCollection,
+  //     showAllUsers
+  //       ? [orderBy('createdAt', 'desc')]
+  //       : following.length > 0
+  //         ? [where('createdBy', 'in', following), orderBy('createdAt', 'desc')]
+  //         : [],
+  //     { includeUser: true, allowNull: true, preserve: true }
+  //   );
+
   return (
     <MainContainer>
       <SEO title='Home / Fofoca.me' />

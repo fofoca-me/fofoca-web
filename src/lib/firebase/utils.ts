@@ -263,6 +263,7 @@ export function manageLike(
           type: 'liked',
           userId: userId,
           targetUserId: createdBy,
+          targetTweetId: tweetId,
           createdAt: serverTimestamp(),
           updatedAt: null,
           isChecked: false

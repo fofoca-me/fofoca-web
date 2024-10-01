@@ -47,6 +47,9 @@ export const NotificationTypes = (notification: NotificationWithUser) => {
   return {
     ...userInfo,
     image_url: notification.user.photoURL,
-    url: `/user/${notification.user.username}`
+    url:
+      notification.type === 'liked' && notification.targetTweetId
+        ? `/fofoca/${notification.targetTweetId}`
+        : `/user/${notification.user.username}`
   };
 };

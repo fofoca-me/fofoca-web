@@ -5,6 +5,7 @@ import { updateUserTheme } from '@lib/firebase/utils';
 import { useAuth } from './auth-context';
 import type { ReactNode, ChangeEvent } from 'react';
 import type { Theme, Accent } from '@lib/types/theme';
+import { SocketContextProvider } from './web-socket-context';
 
 type ThemeContext = {
   theme: Theme;

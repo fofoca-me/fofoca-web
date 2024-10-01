@@ -33,6 +33,7 @@ export function MainHeader({
   action
 }: HomeHeaderProps): JSX.Element {
   const { isMobile } = useWindow();
+
   return (
     <header
       className={cn(

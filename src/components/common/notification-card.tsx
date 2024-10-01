@@ -6,7 +6,14 @@ import { notificationsCollection } from '@lib/firebase/collections';
 import { useInfiniteScroll } from '@lib/hooks/useInfiniteScroll';
 import type { NotificationWithUser } from '@lib/types/notification';
 import { preventBubbling } from '@lib/utils';
-import { doc, query, updateDoc, where } from 'firebase/firestore';
+import {
+  doc,
+  limit,
+  orderBy,
+  query,
+  updateDoc,
+  where
+} from 'firebase/firestore';
 import type { MotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 import Image from 'next/image';

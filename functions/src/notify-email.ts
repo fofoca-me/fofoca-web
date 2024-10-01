@@ -24,7 +24,7 @@ export const notifyEmail = regionalFunctions.firestore
       }
     });
 
-    const tweetLink = `https://twitter-clone-ccrsxx.vercel.app/tweet/${snapshot.id}`;
+    const tweetLink = `https://twitter-clone-ccrsxx.vercel.app/fofoca/${snapshot.id}`;
 
     const emailHeader = `Nova Fofoca${
       parent ? ' responder' : ''

@@ -7,6 +7,9 @@ import { useRouter } from 'next/router';
 import { MainHeader } from '@components/home/main-header';
 import ContactService from 'service.ts/contact';
 import type { FormDataContact } from '@lib/types/contact';
+import { WindowContextProvider } from '@lib/context/window-context';
+import { ReactElement, ReactNode } from 'react';
+import { ProtectedLayout } from '@components/layout/common-layout';
 
 export default function Contact() {
   const {
@@ -103,3 +106,11 @@ export default function Contact() {
     </div>
   );
 }
+
+Contact.getLayout = (page: ReactElement): ReactNode => {
+  return (
+    <ProtectedLayout>
+      <WindowContextProvider>{page}</WindowContextProvider>
+    </ProtectedLayout>
+  );
+};
