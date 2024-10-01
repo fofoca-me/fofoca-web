@@ -20,7 +20,7 @@ const isWebView = (): boolean => {
     navigator.vendor ||
     window.opera) as string;
 
-  return !!userAgent?.includes('Instagram');
+  return !!userAgent?.includes('Instagram') || !!userAgent.includes('Build/');
 };
 
 export function LoginMain(): JSX.Element {
@@ -123,8 +123,6 @@ export function LoginMain(): JSX.Element {
               .
             </p>
           </div>
-
-          <p>{navigator.userAgent || navigator.vendor || window.opera}</p>
 
           <div className='flex flex-col gap-3'>
             <p className='font-bold'>Já tem uma conta?</p>

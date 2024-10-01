@@ -4,6 +4,7 @@ import type { Timestamp, FirestoreDataConverter } from 'firebase/firestore';
 export type User = {
   id: string;
   bio: string | null;
+  email: string | null;
   name: string;
   theme: Theme | null;
   accent: Accent | null;

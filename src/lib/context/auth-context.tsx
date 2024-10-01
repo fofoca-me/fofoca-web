@@ -60,7 +60,7 @@ export function AuthContextProvider({
 
   useEffect(() => {
     const manageUser = async (authUser: AuthUser): Promise<void> => {
-      const { uid, displayName, photoURL } = authUser;
+      const { uid, displayName, photoURL, email } = authUser;
 
       const token = await authUser.getIdToken();
       nookies.set(undefined, 'token', token, { path: '/' });
@@ -86,6 +86,7 @@ export function AuthContextProvider({
 
         const userData: WithFieldValue<User> = {
           id: uid,
+          email: email,
           bio: null,
           name: displayName as string,
           theme: null,
